@@ -5,8 +5,10 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.ai.chat.model.ChatResponse;
+import org.springframework.web.bind.annotation.RestController;
 
 @Log4j2
+@RestController
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class OpenaiController implements OpenaiAPI {
     private final OpenaiService openaiService;
