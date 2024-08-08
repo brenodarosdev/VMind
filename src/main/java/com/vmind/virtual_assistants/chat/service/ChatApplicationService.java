@@ -3,6 +3,7 @@ package com.vmind.virtual_assistants.chat.service;
 import com.vmind.virtual_assistants.chat.api.NewVoiceChatElevenLabsTTSRequest;
 import com.vmind.virtual_assistants.chat.api.NewVoiceChatRequest;
 import com.vmind.virtual_assistants.chat.api.NewVoiceChatResponse;
+import com.vmind.virtual_assistants.chat.repository.ChatRepository;
 import com.vmind.virtual_assistants.openai.service.OpenaiService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ChatApplicationService implements ChatService {
     private final OpenaiService openaiService;
+    private final ChatRepository chatRepository;
 
     @Override
     public NewVoiceChatResponse newVoiceChat(NewVoiceChatRequest voiceChatRequest) {
@@ -22,6 +24,7 @@ public class ChatApplicationService implements ChatService {
         ChatResponse openaiResponse = openaiService.callChatModel(VoiceChatElevenLabsTTS.getOpenaiCallRequest());
         NewVoiceChatResponse response = new NewVoiceChatResponse(openaiResponse.getResult().getOutput().getMetadata(),
                 openaiResponse.getResult().getOutput().getContent());
+        chatRepository.salva(response);
         log.debug("[finish] ChatApplicationService - newVoiceChat");
         return response;
     }
