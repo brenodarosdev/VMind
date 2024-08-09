@@ -14,7 +14,7 @@ public class ChatRepositoryInfraRepository implements ChatRepository {
     private final ChatSpringDataJPARepository chatSpringDataJPARepository;
 
     @Override
-    public void salva(NewVoiceChatResponse response) {
+    public void save(NewVoiceChatResponse response) {
        log.debug("[start] ChatRepositoryInfraRepository - salva");
        chatSpringDataJPARepository.save(new Chat(response));
        log.debug("[finish] ChatRepositoryInfraRepository - salva");
