@@ -1,4 +1,4 @@
-package com.vmind.virtual_assistants.chat.api;
+package com.vmind.virtual_assistants.chat.application.api;
 
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;

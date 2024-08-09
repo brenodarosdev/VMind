@@ -1,6 +1,6 @@
 package com.vmind.virtual_assistants.openai.service;
 
-import com.vmind.virtual_assistants.chat.api.OpenaiCallRequest;
+import com.vmind.virtual_assistants.chat.application.api.OpenaiCallRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.ai.chat.model.ChatResponse;

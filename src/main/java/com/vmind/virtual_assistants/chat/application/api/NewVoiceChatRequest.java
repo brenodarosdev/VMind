@@ -1,4 +1,4 @@
-package com.vmind.virtual_assistants.chat.api;
+package com.vmind.virtual_assistants.chat.application.api;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
