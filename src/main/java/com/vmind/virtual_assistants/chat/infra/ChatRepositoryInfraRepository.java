@@ -3,8 +3,11 @@ package com.vmind.virtual_assistants.chat.infra;
 import com.vmind.virtual_assistants.chat.application.api.NewVoiceChatResponse;
 import com.vmind.virtual_assistants.chat.application.repository.ChatRepository;
 import com.vmind.virtual_assistants.chat.domain.Chat;
+import com.vmind.virtual_assistants.exception.APIException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 @Log4j2
@@ -16,7 +19,11 @@ public class ChatRepositoryInfraRepository implements ChatRepository {
     @Override
     public void save(NewVoiceChatResponse response) {
        log.debug("[start] ChatRepositoryInfraRepository - save");
-       chatSpringDataJPARepository.save(new Chat(response));
+        try {
+            chatSpringDataJPARepository.save(new Chat(response));
+        } catch (DataIntegrityViolationException e) {
+            throw APIException.build(HttpStatus.CONFLICT,e.getMessage(), e);
+        }
        log.debug("[finish] ChatRepositoryInfraRepository - save");
     }
 }
