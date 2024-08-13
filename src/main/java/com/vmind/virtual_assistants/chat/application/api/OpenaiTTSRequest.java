@@ -1,11 +1,12 @@
 package com.vmind.virtual_assistants.chat.application.api;
 
-import jakarta.validation.Valid;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import lombok.AllArgsConstructor;
 import lombok.Value;
 import org.springframework.ai.openai.OpenAiAudioSpeechOptions;
 
 @Value
+@AllArgsConstructor(onConstructor = @__(@JsonCreator))
 public class OpenaiTTSRequest {
-    @Valid
     OpenAiAudioSpeechOptions speechOptions;
 }

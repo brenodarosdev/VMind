@@ -14,9 +14,8 @@ public class JLayerPlayer implements AudioPlayer {
     public void playAudio(InputStream audioStream) {
         log.debug("[start] JLayerPlayer - playAudio");
         try {
-            Player player = new Player(audioStream);
             log.debug("[JLayerPlayer] Playing...");
-            player.play();
+            new Player(audioStream).play();
         } catch (JavaLayerException e) {
             e.printStackTrace(); //TODO Tratar exceções de reprodução
         }
