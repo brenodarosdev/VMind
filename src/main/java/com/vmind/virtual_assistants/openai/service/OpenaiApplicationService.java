@@ -28,9 +28,10 @@ public class OpenaiApplicationService implements OpenaiService {
     }
 
     @Override
-    public void textToSpeech(String content, OpenaiTTSRequest request) {
+    public byte[] textToSpeech(String content, OpenaiTTSRequest request) {
         log.debug("[start] OpenaiApplicationService - textToSpeech");
         SpeechResponse responseStream = openAiAudioSpeechModel.call(new SpeechPrompt(content, request.getSpeechOptions()));
         log.debug("[finish] OpenaiApplicationService - textToSpeech");
+        return responseStream.getResult().getOutput();
     }
 }

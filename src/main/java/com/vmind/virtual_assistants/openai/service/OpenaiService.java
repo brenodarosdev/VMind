@@ -6,5 +6,5 @@ import org.springframework.ai.chat.model.ChatResponse;
 
 public interface OpenaiService {
     ChatResponse callChatModel(OpenaiCallRequest request);
-    void textToSpeech(String content, OpenaiTTSRequest request);
+    byte[] textToSpeech(String content, OpenaiTTSRequest request);
 }

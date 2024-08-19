@@ -18,11 +18,12 @@ public class ElevenLabsApplicationService implements ElevenLabsService {
     private String apiKey;
 
     @Override
-    public void textToSpeech(String content, ElevenLabsTTSRequest request) {
+    public byte[] textToSpeech(String content, ElevenLabsTTSRequest request) {
         log.debug("[start] ElevenLabsApplicationService - textToSpeech");
         String bodyJsonString = new Gson()
                 .toJson(new ElevenLabsTTSRequestDTO(content, request));
         byte[] speech = elevenLabsClientFeign.textToSpeechStream(apiKey, request.getVoiceId(), bodyJsonString);
         log.debug("[finish] ElevenLabsApplicationService - textToSpeech");
+        return speech;
     }
 }
