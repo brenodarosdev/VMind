@@ -6,10 +6,12 @@ import com.vmind.virtual_assistants.chat.application.api.NewVoiceChatRequest;
 import com.vmind.virtual_assistants.chat.application.api.NewVoiceChatResponse;
 import com.vmind.virtual_assistants.chat.application.repository.ChatRepository;
 import com.vmind.virtual_assistants.elevenlabs.service.ElevenLabsService;
+import com.vmind.virtual_assistants.exception.APIException;
 import com.vmind.virtual_assistants.openai.service.OpenaiService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.ai.chat.model.ChatResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Log4j2
@@ -24,15 +26,26 @@ public class ChatApplicationService implements ChatService {
     public NewVoiceChatResponse newVoiceChat(NewVoiceChatRequest voiceChatRequest) {
         log.debug("[start] ChatApplicationService - newVoiceChat");
         ChatResponse openaiResponse = openaiService.callChatModel(voiceChatRequest.getOpenaiCallRequest());
+        String openaiResponseContent = openaiResponse.getResult().getOutput().getContent();
+        byte[] speech = textToSpeech(voiceChatRequest, openaiResponseContent);
         NewVoiceChatResponse response = new NewVoiceChatResponse(openaiResponse.getResult().getOutput().getMetadata(),
-                openaiResponse.getResult().getOutput().getContent());
+                openaiResponseContent, speech);
         chatRepository.save(response);
-        if (voiceChatRequest instanceof NewVoiceChatElevenLabsTTSRequest voiceChatElevenLabsTTS) {
-            elevenLabsService.textToSpeech(response.getContent(), voiceChatElevenLabsTTS.getElevenLabsTTSRequest());
-        } else if (voiceChatRequest instanceof NewVoiceChatOpenaiTTSRequest voiceChatOpenaiTTSRequest) {
-            openaiService.textToSpeech(response.getContent(), voiceChatOpenaiTTSRequest.getOpenaiTTSRequest());
-        }
         log.debug("[finish] ChatApplicationService - newVoiceChat");
         return response;
+    }
+
+    private byte[] textToSpeech(NewVoiceChatRequest voiceChatRequest, String openaiResponseContent) {
+        log.debug("[start] ChatApplicationService - textToSpeech");
+        byte[] speech;
+        if (voiceChatRequest instanceof NewVoiceChatElevenLabsTTSRequest voiceChatElevenLabsTTS) {
+            speech = elevenLabsService.textToSpeech(openaiResponseContent, voiceChatElevenLabsTTS.getElevenLabsTTSRequest());
+        } else if (voiceChatRequest instanceof NewVoiceChatOpenaiTTSRequest voiceChatOpenaiTTSRequest) {
+            speech = openaiService.textToSpeech(openaiResponseContent, voiceChatOpenaiTTSRequest.getOpenaiTTSRequest());
+        } else {
+            throw APIException.build(HttpStatus.BAD_REQUEST, "Unknown request type: " + voiceChatRequest.getClass().getName());
+        }
+        log.debug("[finish] ChatApplicationService - textToSpeech");
+        return speech;
     }
 }
