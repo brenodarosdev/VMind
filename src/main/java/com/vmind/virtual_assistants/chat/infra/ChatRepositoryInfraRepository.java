@@ -1,6 +1,5 @@
 package com.vmind.virtual_assistants.chat.infra;
 
-import com.vmind.virtual_assistants.chat.application.api.NewVoiceChatResponse;
 import com.vmind.virtual_assistants.chat.application.repository.ChatRepository;
 import com.vmind.virtual_assistants.chat.domain.Chat;
 import com.vmind.virtual_assistants.exception.APIException;
@@ -17,10 +16,10 @@ public class ChatRepositoryInfraRepository implements ChatRepository {
     private final ChatSpringDataJPARepository chatSpringDataJPARepository;
 
     @Override
-    public void save(NewVoiceChatResponse response) {
+    public void save(Chat chat) {
        log.debug("[start] ChatRepositoryInfraRepository - save");
         try {
-            chatSpringDataJPARepository.save(new Chat(response));
+            chatSpringDataJPARepository.save(chat);
         } catch (DataIntegrityViolationException e) {
             throw APIException.build(HttpStatus.CONFLICT,e.getMessage(), e);
         }

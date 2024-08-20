@@ -15,8 +15,8 @@ public class Chat {
     @Column(length = Integer.MAX_VALUE)
     private String content;
 
-    public Chat(NewVoiceChatResponse response) {
-        this.id = response.getId();
-        this.content = response.getContent();
+    public Chat(UUID id, String content) {
+        this.id = id;
+        this.content = content;
     }
 }

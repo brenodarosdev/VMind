@@ -5,6 +5,7 @@ import com.vmind.virtual_assistants.chat.application.api.NewVoiceChatOpenaiTTSRe
 import com.vmind.virtual_assistants.chat.application.api.NewVoiceChatRequest;
 import com.vmind.virtual_assistants.chat.application.api.NewVoiceChatResponse;
 import com.vmind.virtual_assistants.chat.application.repository.ChatRepository;
+import com.vmind.virtual_assistants.chat.domain.Chat;
 import com.vmind.virtual_assistants.elevenlabs.service.ElevenLabsService;
 import com.vmind.virtual_assistants.exception.APIException;
 import com.vmind.virtual_assistants.openai.service.OpenaiService;
@@ -30,7 +31,7 @@ public class ChatApplicationService implements ChatService {
         byte[] speech = textToSpeech(voiceChatRequest, openaiResponseContent);
         NewVoiceChatResponse response = new NewVoiceChatResponse(openaiResponse.getResult().getOutput().getMetadata(),
                 openaiResponseContent, speech);
-        chatRepository.save(response);
+        chatRepository.save(new Chat(response.getId(),response.getContent()));
         log.debug("[finish] ChatApplicationService - newVoiceChat");
         return response;
     }

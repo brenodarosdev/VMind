@@ -1,7 +1,7 @@
 package com.vmind.virtual_assistants.chat.application.repository;
 
-import com.vmind.virtual_assistants.chat.application.api.NewVoiceChatResponse;
+import com.vmind.virtual_assistants.chat.domain.Chat;
 
 public interface ChatRepository {
-    void save(NewVoiceChatResponse response);
+    void save(Chat chat);
 }
