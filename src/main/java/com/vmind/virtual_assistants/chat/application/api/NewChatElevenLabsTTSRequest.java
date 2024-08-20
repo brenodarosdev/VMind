@@ -4,9 +4,9 @@ import jakarta.validation.Valid;
 import lombok.Value;
 
 @Value
-public class NewVoiceChatOpenaiTTSRequest implements NewVoiceChatRequest {
+public class NewChatElevenLabsTTSRequest implements NewChatRequest {
     @Valid
     OpenaiCallRequest openaiCallRequest;
     @Valid
-    OpenaiTTSRequest openaiTTSRequest;
+    ElevenLabsTTSRequest elevenLabsTTSRequest;
 }

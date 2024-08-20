@@ -1,8 +1,8 @@
 package com.vmind.virtual_assistants.chat.application.service;
 
-import com.vmind.virtual_assistants.chat.application.api.NewVoiceChatRequest;
-import com.vmind.virtual_assistants.chat.application.api.NewVoiceChatResponse;
+import com.vmind.virtual_assistants.chat.application.api.ChatIdResponse;
+import com.vmind.virtual_assistants.chat.application.api.NewChatRequest;
 
 public interface ChatService {
-    NewVoiceChatResponse newVoiceChat(NewVoiceChatRequest voiceChatRequest);
+    ChatIdResponse newChat(NewChatRequest voiceChatRequest);
 }
