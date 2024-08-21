@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Chat")
 @RequestMapping("/public/v1/assistants")
 public interface ChatAPI {
-    @PostMapping("/new-voice-chat")
-    @Operation(summary = "Create a new voice chat")
-    NewVoiceChatResponse postNewVoiceChat(@RequestBody @Valid NewVoiceChatRequest voiceChatRequest);
+    @PostMapping("/new-chat")
+    @Operation(summary = "Save a new chat")
+    NewChatResponse postNewChat(@RequestBody @Valid NewChatRequest voiceChatRequest);
 }

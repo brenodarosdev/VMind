@@ -12,10 +12,10 @@ public class ChatController implements ChatAPI {
     private final ChatService chatService;
 
     @Override
-    public NewVoiceChatResponse postNewVoiceChat(NewVoiceChatRequest voiceChatRequest) {
-        log.debug("[start] ChatController - postNewVoiceChat");
-        NewVoiceChatResponse response = chatService.newVoiceChat(voiceChatRequest);
-        log.debug("[finish] ChatController - postNewVoiceChat");
+    public NewChatResponse postNewChat(NewChatRequest voiceChatRequest) {
+        log.debug("[start] ChatController - postNewChat");
+        NewChatResponse response = chatService.newChat(voiceChatRequest);
+        log.debug("[finish] ChatController - postNewChat");
         return response;
     }
 }
