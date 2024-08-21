@@ -1,6 +1,6 @@
 package com.vmind.virtual_assistants.elevenlabs.service;
 
-import com.vmind.virtual_assistants.chat.application.api.ElevenLabsTTSRequest;
+import com.vmind.virtual_assistants.chat.application.api.ElevenLabsTTSSettigs;
 
 public class ElevenLabsTTSRequestDTO {
     private String text;
@@ -8,20 +8,20 @@ public class ElevenLabsTTSRequestDTO {
     private String language_code;
     private VoiceSettingsDTO voice_settings;
 
-    public ElevenLabsTTSRequestDTO(String content, ElevenLabsTTSRequest request) {
-        this.text = content;
+    public ElevenLabsTTSRequestDTO(String input, ElevenLabsTTSSettigs request) {
+        this.text = input;
         this.model_id = request.getModelId();
         this.language_code = request.getLanguageCode();
-        this.voice_settings = new VoiceSettingsDTO(request.getVoiceSettings());
+        this.voice_settings = new VoiceSettingsDTO(request);
     }
 
     public static class VoiceSettingsDTO {
-        String similarity_boost;
-        String stability;
+        private String similarity_boost;
+        private String stability;
 
-        public VoiceSettingsDTO(ElevenLabsTTSRequest.VoiceSettings settings) {
-            this.similarity_boost = settings.getSimilarityBoost();
-            this.stability = settings.getStability();
+        public VoiceSettingsDTO(ElevenLabsTTSSettigs settings) {
+            this.similarity_boost = settings.getSimilarityBoost().toString();
+            this.stability = settings.getStability().toString();
         }
     }
 }

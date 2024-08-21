@@ -14,5 +14,5 @@ import org.springframework.web.bind.annotation.RestController;
 public interface ChatAPI {
     @PostMapping("/new-chat")
     @Operation(summary = "Save a new chat")
-    ChatIdResponse postNewChat(@RequestBody @Valid NewChatRequest voiceChatRequest);
+    NewChatResponse postNewChat(@RequestBody @Valid NewChatRequest voiceChatRequest);
 }

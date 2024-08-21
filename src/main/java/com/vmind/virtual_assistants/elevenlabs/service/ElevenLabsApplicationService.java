@@ -1,7 +1,7 @@
 package com.vmind.virtual_assistants.elevenlabs.service;
 
 import com.google.gson.Gson;
-import com.vmind.virtual_assistants.chat.application.api.ElevenLabsTTSRequest;
+import com.vmind.virtual_assistants.chat.application.api.ElevenLabsTTSSettigs;
 import com.vmind.virtual_assistants.elevenlabs.infra.client.ElevenLabsClientFeign;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -18,10 +18,10 @@ public class ElevenLabsApplicationService implements ElevenLabsService {
     private String apiKey;
 
     @Override
-    public byte[] textToSpeech(String content, ElevenLabsTTSRequest request) {
+    public byte[] textToSpeech(String input, ElevenLabsTTSSettigs request) {
         log.debug("[start] ElevenLabsApplicationService - textToSpeech");
         String bodyJsonString = new Gson()
-                .toJson(new ElevenLabsTTSRequestDTO(content, request));
+                .toJson(new ElevenLabsTTSRequestDTO(input, request));
         byte[] speech = elevenLabsClientFeign.textToSpeechStream(apiKey, request.getVoiceId(), bodyJsonString);
         log.debug("[finish] ElevenLabsApplicationService - textToSpeech");
         return speech;

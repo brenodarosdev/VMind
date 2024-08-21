@@ -1,7 +1,6 @@
 package com.vmind.virtual_assistants.chat.application.service;
 
-import com.vmind.virtual_assistants.chat.application.api.ChatIdResponse;
-import com.vmind.virtual_assistants.chat.application.api.NewChatRequest;
+import com.vmind.virtual_assistants.chat.application.api.*;
 import com.vmind.virtual_assistants.chat.application.repository.ChatRepository;
 import com.vmind.virtual_assistants.chat.domain.Chat;
 import com.vmind.virtual_assistants.openai.service.OpenaiService;
@@ -18,12 +17,13 @@ public class ChatApplicationService implements ChatService {
     private final ChatRepository chatRepository;
 
     @Override
-    public ChatIdResponse newChat(NewChatRequest chatRequest) {
+    public NewChatResponse newChat(NewChatRequest chatRequest) {
         log.debug("[start] ChatApplicationService - newChat");
-        ChatResponse openaiResponse = openaiService.callChatModel(chatRequest.getOpenaiCallRequest());
-        Chat chat = new Chat(openaiResponse.getResult().getOutput().getContent());
+        ChatResponse openaiResponse = openaiService.callChatModel(chatRequest.getChatSettings());
+        Chat chat = new Chat(openaiResponse.getResult().getOutput().getContent(), chatRequest.getChatSettings(),
+                chatRequest.getOpenaiTTSSettings(), chatRequest.getElevenLabsTTSSettigs());
         chatRepository.save(chat);
         log.debug("[finish] ChatApplicationService - newChat");
-        return new ChatIdResponse(chat.getIdChat());
+        return new NewChatResponse(chat.getIdChat(), chat.getContent());
     }
 }

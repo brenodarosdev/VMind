@@ -5,6 +5,7 @@ import lombok.Value;
 import java.util.UUID;
 
 @Value
-public class ChatIdResponse {
+public class NewChatResponse {
     UUID idChat;
+    String content;
 }
