@@ -20,5 +20,5 @@ public interface ChatAPI {
     @GetMapping("/find-chat/{idChat}")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Find Chat by ID")
-    ChatDetailsResponse getChatById(@PathVariable UUID idChat);
+    ChatDetailsResponse getChatDitailsById(@PathVariable UUID idChat);
 }

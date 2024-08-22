@@ -22,9 +22,9 @@ public class ChatController implements ChatAPI {
     }
 
     @Override
-    public ChatDetailsResponse getChatById(UUID idChat) {
+    public ChatDetailsResponse getChatDitailsById(UUID idChat) {
         log.debug("[start] ChatController - getChatById");
-        ChatDetailsResponse response = chatService.chatById(idChat);
+        ChatDetailsResponse response = chatService.chatDetailsById(idChat);
         log.debug("[finish] ChatController - getChatById");
         return response;
     }

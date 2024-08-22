@@ -30,7 +30,7 @@ public class ChatApplicationService implements ChatService {
     }
 
     @Override
-    public ChatDetailsResponse chatById(UUID idChat) {
+    public ChatDetailsResponse chatDetailsById(UUID idChat) {
         log.debug("[start] ChatApplicationService - chatById");
         Chat chat = chatRepository.chatById(idChat);
         ChatDetailsResponse response = new ChatDetailsResponse(chat);
