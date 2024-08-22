@@ -40,7 +40,7 @@ public class RestResponseEntityExceptionHandler {
 
     @ExceptionHandler(APIException.class)
     public ResponseEntity<ErrorApiResponse> handlerGenericException(APIException e) {
-        log.error(e.getStatusException() + "Exception message: " + e.getMessage());
+        log.error(e.getStatusException() + " Exception message: " + e.getMessage());
         return e.buildErrorResponseEntity();
     }
 }

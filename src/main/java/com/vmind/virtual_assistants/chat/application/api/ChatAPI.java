@@ -18,7 +18,7 @@ public interface ChatAPI {
     NewChatResponse postNewChat(@RequestBody @Valid ChatRequest chatRequest);
 
     @GetMapping("/find-chat/{idChat}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Find Chat by ID")
     ChatDetailsResponse getChatById(@PathVariable UUID idChat);
 }
