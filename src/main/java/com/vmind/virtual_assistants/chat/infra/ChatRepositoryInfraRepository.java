@@ -33,4 +33,11 @@ public class ChatRepositoryInfraRepository implements ChatRepository {
         return chat;
 
     }
+
+    @Override
+    public void deleteChat(UUID idChat) {
+        log.debug("[start] ChatRepositoryInfraRepository - deleteChat");
+        chatSpringDataJPARepository.deleteById(idChat);
+        log.debug("[finish] ChatRepositoryInfraRepository - deleteChat");
+    }
 }

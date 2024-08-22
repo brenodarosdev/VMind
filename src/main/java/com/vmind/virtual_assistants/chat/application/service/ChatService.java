@@ -10,4 +10,5 @@ public interface ChatService {
     NewChatResponse newChat(ChatRequest voiceChatRequest);
     ChatDetailsResponse chatDetailsById(UUID idChat);
     void modifyChatSettings(ChatRequest chatRequest, UUID idChat);
+    void deleteChat(UUID idChat);
 }

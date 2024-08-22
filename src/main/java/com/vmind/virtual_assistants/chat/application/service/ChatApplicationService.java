@@ -46,4 +46,11 @@ public class ChatApplicationService implements ChatService {
         chatRepository.save(chat);
         log.debug("[finish] ChatApplicationService - modifyChat");
     }
+
+    @Override
+    public void deleteChat(UUID idChat) {
+        log.debug("[start] ChatApplicationService - deleteChat");
+        chatRepository.deleteChat(idChat);
+        log.debug("[finish] ChatApplicationService - deleteChat");
+    }
 }

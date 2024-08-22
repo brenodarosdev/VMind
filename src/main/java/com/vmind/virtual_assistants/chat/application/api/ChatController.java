@@ -35,4 +35,11 @@ public class ChatController implements ChatAPI {
         chatService.modifyChatSettings(chatRequest, idChat);
         log.debug("[finish] ChatController - patchModifyChat");
     }
+
+    @Override
+    public void deleteChat(UUID idChat) {
+        log.debug("[start] ChatController - deleteChat");
+        chatService.deleteChat(idChat);
+        log.debug("[finish] ChatController - deleteChat");
+    }
 }
