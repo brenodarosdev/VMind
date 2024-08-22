@@ -11,13 +11,13 @@ public class ChatDetailsResponse {
     private String content;
     private ChatSettings chatSettings;
     private OpenaiTTSSettings openaiTTSSettings;
-    private ElevenLabsTTSSettigs elevenLabsTTSSettigs;
+    private ElevenLabsTTSSettings elevenLabsTTSSettings;
 
     public ChatDetailsResponse(Chat chat) {
         this.idChat = chat.getIdChat();
         this.content = chat.getContent();
         this.chatSettings = chat.getChatSettings();
         this.openaiTTSSettings = chat.getOpenaiTTSSettings();
-        this.elevenLabsTTSSettigs = chat.getElevenLabsTTSSettigs();
+        this.elevenLabsTTSSettings = chat.getElevenLabsTTSSettings();
     }
 }

@@ -12,7 +12,7 @@ public class ElevenLabsController implements ElevenLabsAPI {
     private final ElevenLabsService elevenLabsService;
 
     @Override
-    public byte[] textToSpeech(TTSRequest request) {
+    public byte[] textToSpeech(ElevenLabsTTSRequest request) {
         log.debug("[start] ElevenLabsController - textToSpeech");
         byte[] response = elevenLabsService.textToSpeech(request);
         log.debug("[finish] ElevenLabsController - textToSpeech");

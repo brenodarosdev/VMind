@@ -10,5 +10,5 @@ public class ChatRequest {
     @Valid
     OpenaiTTSSettings openaiTTSSettings;
     @Valid
-    ElevenLabsTTSSettigs elevenLabsTTSSettigs;
+    ElevenLabsTTSSettings elevenLabsTTSSettings;
 }

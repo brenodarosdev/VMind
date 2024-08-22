@@ -2,7 +2,7 @@ package com.vmind.virtual_assistants.chat.domain;
 
 import com.vmind.virtual_assistants.chat.application.api.ChatRequest;
 import com.vmind.virtual_assistants.chat.application.api.ChatSettings;
-import com.vmind.virtual_assistants.chat.application.api.ElevenLabsTTSSettigs;
+import com.vmind.virtual_assistants.chat.application.api.ElevenLabsTTSSettings;
 import com.vmind.virtual_assistants.chat.application.api.OpenaiTTSSettings;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -24,19 +24,19 @@ public class Chat {
     @Embedded
     private OpenaiTTSSettings openaiTTSSettings;
     @Embedded
-    private ElevenLabsTTSSettigs elevenLabsTTSSettigs;
+    private ElevenLabsTTSSettings elevenLabsTTSSettings;
 
-    public Chat(String content, ChatSettings chatSettings, OpenaiTTSSettings openaiTTSSettings, ElevenLabsTTSSettigs elevenLabsTTSSettigs) {
+    public Chat(String content, ChatSettings chatSettings, OpenaiTTSSettings openaiTTSSettings, ElevenLabsTTSSettings elevenLabsTTSSettings) {
         this.idChat = UUID.randomUUID();
         this.content = content;
         this.chatSettings = chatSettings;
         this.openaiTTSSettings = openaiTTSSettings;
-        this.elevenLabsTTSSettigs = elevenLabsTTSSettigs;
+        this.elevenLabsTTSSettings = elevenLabsTTSSettings;
     }
 
     public void modifyChatSettings(ChatRequest chatRequest) {
         this.chatSettings = chatRequest.getChatSettings();
         this.openaiTTSSettings = chatRequest.getOpenaiTTSSettings();
-        this.elevenLabsTTSSettigs = chatRequest.getElevenLabsTTSSettigs();
+        this.elevenLabsTTSSettings = chatRequest.getElevenLabsTTSSettings();
     }
 }
