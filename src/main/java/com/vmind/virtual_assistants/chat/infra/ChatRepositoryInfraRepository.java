@@ -9,6 +9,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 @Log4j2
 @Repository
 @RequiredArgsConstructor
@@ -24,5 +26,12 @@ public class ChatRepositoryInfraRepository implements ChatRepository {
             throw APIException.build(HttpStatus.CONFLICT,e.getMessage(), e);
         }
        log.debug("[finish] ChatRepositoryInfraRepository - save");
+    }
+
+    @Override
+    public Chat chatById(UUID idChat) {
+        log.debug("[start] ChatRepositoryInfraRepository - chatById");
+        log.debug("[finish] ChatRepositoryInfraRepository - chatById");
+        return null;
     }
 }
