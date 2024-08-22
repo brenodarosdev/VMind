@@ -9,6 +9,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Log4j2
 @Service
 @RequiredArgsConstructor
@@ -25,5 +27,12 @@ public class ChatApplicationService implements ChatService {
         chatRepository.save(chat);
         log.debug("[finish] ChatApplicationService - newChat");
         return new NewChatResponse(chat.getIdChat(), chat.getContent());
+    }
+
+    @Override
+    public ChatDetailsResponse chatById(UUID idChat) {
+        log.debug("[start] ChatApplicationService - chatById");
+        log.debug("[finish] ChatApplicationService - chatById");
+        return null;
     }
 }
