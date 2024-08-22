@@ -1,5 +1,6 @@
 package com.vmind.virtual_assistants.chat.domain;
 
+import com.vmind.virtual_assistants.chat.application.api.ChatRequest;
 import com.vmind.virtual_assistants.chat.application.api.ChatSettings;
 import com.vmind.virtual_assistants.chat.application.api.ElevenLabsTTSSettigs;
 import com.vmind.virtual_assistants.chat.application.api.OpenaiTTSSettings;
@@ -31,5 +32,11 @@ public class Chat {
         this.chatSettings = chatSettings;
         this.openaiTTSSettings = openaiTTSSettings;
         this.elevenLabsTTSSettigs = elevenLabsTTSSettigs;
+    }
+
+    public void modifyChatSettings(ChatRequest chatRequest) {
+        this.chatSettings = chatRequest.getChatSettings();
+        this.openaiTTSSettings = chatRequest.getOpenaiTTSSettings();
+        this.elevenLabsTTSSettigs = chatRequest.getElevenLabsTTSSettigs();
     }
 }
