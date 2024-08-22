@@ -13,5 +13,5 @@ public interface ElevenLabsAPI {
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Text to speech")
     @PostMapping("/text-to-speech")
-    byte[] textToSpeech(@RequestBody @Valid TTSRequest request);
+    byte[] textToSpeech(@RequestBody @Valid ElevenLabsTTSRequest request);
 }

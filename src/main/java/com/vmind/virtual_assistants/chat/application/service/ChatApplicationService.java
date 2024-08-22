@@ -23,7 +23,7 @@ public class ChatApplicationService implements ChatService {
         log.debug("[start] ChatApplicationService - newChat");
         ChatResponse openaiResponse = openaiService.callChatModel(chatRequest.getChatSettings());
         Chat chat = new Chat(openaiResponse.getResult().getOutput().getContent(), chatRequest.getChatSettings(),
-                chatRequest.getOpenaiTTSSettings(), chatRequest.getElevenLabsTTSSettigs());
+                chatRequest.getOpenaiTTSSettings(), chatRequest.getElevenLabsTTSSettings());
         chatRepository.save(chat);
         log.debug("[finish] ChatApplicationService - newChat");
         return new NewChatResponse(chat.getIdChat(), chat.getContent());
