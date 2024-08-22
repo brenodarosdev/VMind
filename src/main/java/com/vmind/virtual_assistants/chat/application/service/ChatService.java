@@ -9,4 +9,5 @@ import java.util.UUID;
 public interface ChatService {
     NewChatResponse newChat(ChatRequest voiceChatRequest);
     ChatDetailsResponse chatDetailsById(UUID idChat);
+    void modifyChat(ChatRequest chatRequest, UUID idChat);
 }

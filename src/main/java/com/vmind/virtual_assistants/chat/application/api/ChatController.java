@@ -32,6 +32,7 @@ public class ChatController implements ChatAPI {
     @Override
     public void patchModifyChat(ChatRequest chatRequest, UUID idChat) {
         log.debug("[start] ChatController - patchModifyChat");
+        chatService.modifyChat(chatRequest, idChat);
         log.debug("[finish] ChatController - patchModifyChat");
     }
 }
