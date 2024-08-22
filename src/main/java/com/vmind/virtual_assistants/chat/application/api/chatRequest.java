@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import lombok.Value;
 
 @Value
-public class NewChatRequest {
+public class chatRequest {
     @Valid
     ChatSettings chatSettings;
     @Valid
