@@ -23,7 +23,12 @@ public interface ChatAPI {
     ChatDetailsResponse getChatDetailsById(@PathVariable UUID idChat);
 
     @PatchMapping("/modify-chat/{idChat}")
-    @Operation(summary = "Modify Chat by ID")
+    @Operation(summary = "Modify Chat settings by ID")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void patchModifyChatSettings(@RequestBody ChatRequest chatRequest, @PathVariable UUID idChat);
+
+    @DeleteMapping("/delete-chat/{idChat}")
+    @Operation(summary = "Delete Chat by ID")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void deleteChat(@PathVariable UUID idChat);
 }
