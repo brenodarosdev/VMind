@@ -17,7 +17,7 @@ public class ChatApplicationService implements ChatService {
     private final ChatRepository chatRepository;
 
     @Override
-    public NewChatResponse newChat(chatRequest chatRequest) {
+    public NewChatResponse newChat(ChatRequest chatRequest) {
         log.debug("[start] ChatApplicationService - newChat");
         ChatResponse openaiResponse = openaiService.callChatModel(chatRequest.getChatSettings());
         Chat chat = new Chat(openaiResponse.getResult().getOutput().getContent(), chatRequest.getChatSettings(),

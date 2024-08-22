@@ -6,6 +6,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @Tag(name = "Chat")
 @RequestMapping("/public/v1/chat")
@@ -13,6 +15,10 @@ public interface ChatAPI {
     @PostMapping("/new-chat")
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Save a new Chat")
-    NewChatResponse postNewChat(@RequestBody @Valid chatRequest chatRequest);
+    NewChatResponse postNewChat(@RequestBody @Valid ChatRequest chatRequest);
 
+    @GetMapping("/find-chat/{idChat}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Find Chat by ID")
+    ChatDetailsResponse getChatById(@PathVariable UUID idChat);
 }
