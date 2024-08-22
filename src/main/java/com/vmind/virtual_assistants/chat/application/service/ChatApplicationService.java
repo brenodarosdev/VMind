@@ -39,8 +39,11 @@ public class ChatApplicationService implements ChatService {
     }
 
     @Override
-    public void modifyChat(ChatRequest chatRequest, UUID idChat) {
+    public void modifyChatSettings(ChatRequest chatRequest, UUID idChat) {
         log.debug("[start] ChatApplicationService - modifyChat");
+        Chat chat = chatRepository.chatById(idChat);
+        chat.modifyChatSettings(chatRequest);
+        chatRepository.save(chat);
         log.debug("[finish] ChatApplicationService - modifyChat");
     }
 }

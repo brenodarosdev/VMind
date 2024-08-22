@@ -25,5 +25,5 @@ public interface ChatAPI {
     @PatchMapping("/modify-chat/{idChat}")
     @Operation(summary = "Modify Chat by ID")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    void patchModifyChat(@RequestBody ChatRequest chatRequest, @PathVariable UUID idChat);
+    void patchModifyChatSettings(@RequestBody ChatRequest chatRequest, @PathVariable UUID idChat);
 }
