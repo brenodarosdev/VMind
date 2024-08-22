@@ -9,6 +9,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Log4j2
 @Service
 @RequiredArgsConstructor
@@ -17,7 +19,7 @@ public class ChatApplicationService implements ChatService {
     private final ChatRepository chatRepository;
 
     @Override
-    public NewChatResponse newChat(NewChatRequest chatRequest) {
+    public NewChatResponse newChat(ChatRequest chatRequest) {
         log.debug("[start] ChatApplicationService - newChat");
         ChatResponse openaiResponse = openaiService.callChatModel(chatRequest.getChatSettings());
         Chat chat = new Chat(openaiResponse.getResult().getOutput().getContent(), chatRequest.getChatSettings(),
@@ -25,5 +27,14 @@ public class ChatApplicationService implements ChatService {
         chatRepository.save(chat);
         log.debug("[finish] ChatApplicationService - newChat");
         return new NewChatResponse(chat.getIdChat(), chat.getContent());
+    }
+
+    @Override
+    public ChatDetailsResponse chatDetailsById(UUID idChat) {
+        log.debug("[start] ChatApplicationService - chatById");
+        Chat chat = chatRepository.chatById(idChat);
+        ChatDetailsResponse response = new ChatDetailsResponse(chat);
+        log.debug("[finish] ChatApplicationService - chatById");
+        return response;
     }
 }
