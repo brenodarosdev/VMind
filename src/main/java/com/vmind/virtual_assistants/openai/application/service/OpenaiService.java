@@ -1,4 +1,4 @@
-package com.vmind.virtual_assistants.openai.service;
+package com.vmind.virtual_assistants.openai.application.service;
 
 import com.vmind.virtual_assistants.chat.application.api.ChatSettings;
 import com.vmind.virtual_assistants.chat.application.api.OpenaiTTSSettings;
