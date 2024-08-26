@@ -1,7 +1,6 @@
 package com.vmind.virtual_assistants.openai.application.service;
 
 import com.vmind.virtual_assistants.chat.application.api.ChatSettings;
-import com.vmind.virtual_assistants.chat.application.api.OpenaiTTSSettings;
 import com.vmind.virtual_assistants.openai.application.api.OpenaiTTSRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
