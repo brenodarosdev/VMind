@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/public/v1/openai")
 public interface OpenaiAPI {
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Call Chat")
+    @RequestMapping("/call-chat")
+    void callChat(@RequestBody @Valid OpenaiChatRequest request);
+
+    @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Text to speech")
     @RequestMapping("/text-to-speech")
     byte[] textToSpeech(@RequestBody @Valid OpenaiTTSRequest request);

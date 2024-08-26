@@ -12,6 +12,12 @@ public class OpenaiController implements OpenaiAPI {
     private final OpenaiService openaiService;
 
     @Override
+    public void callChat(OpenaiChatRequest request) {
+        log.debug("[start] OpenaiController - callChat");
+        log.debug("[finish] OpenaiController - callChat");
+    }
+
+    @Override
     public byte[] textToSpeech(OpenaiTTSRequest request) {
         log.debug("[start] OpenaiController - textToSpeech");
         byte[] response = openaiService.textToSpeech(request);
