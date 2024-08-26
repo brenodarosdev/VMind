@@ -3,6 +3,7 @@ package com.vmind.virtual_assistants.chat.application.service;
 import com.vmind.virtual_assistants.chat.application.api.*;
 import com.vmind.virtual_assistants.chat.application.repository.ChatRepository;
 import com.vmind.virtual_assistants.chat.domain.Chat;
+import com.vmind.virtual_assistants.openai.application.api.OpenaiChatRequest;
 import com.vmind.virtual_assistants.openai.application.service.OpenaiService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -21,7 +22,7 @@ public class ChatApplicationService implements ChatService {
     @Override
     public NewChatResponse newChat(ChatRequest chatRequest) {
         log.debug("[start] ChatApplicationService - newChat");
-        ChatResponse openaiResponse = openaiService.callChatModel(chatRequest.getChatSettings());
+        ChatResponse openaiResponse = openaiService.callChatModel(new OpenaiChatRequest(chatRequest.getChatSettings()));
         Chat chat = new Chat(openaiResponse.getResult().getOutput().getContent(), chatRequest.getChatSettings(),
                 chatRequest.getOpenaiTTSSettings(), chatRequest.getElevenLabsTTSSettings());
         chatRepository.save(chat);

@@ -14,6 +14,7 @@ public class OpenaiController implements OpenaiAPI {
     @Override
     public void callChat(OpenaiChatRequest request) {
         log.debug("[start] OpenaiController - callChat");
+        openaiService.callChatModel(request);
         log.debug("[finish] OpenaiController - callChat");
     }
 

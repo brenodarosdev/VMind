@@ -11,4 +11,14 @@ public class OpenaiChatRequest {
     String userMessage;
     @Valid
     ChatSettings settings;
+
+    public OpenaiChatRequest(ChatSettings settings) {
+        this.userMessage = "";
+        this.settings = settings;
+    }
+
+    public OpenaiChatRequest(String userMessage, ChatSettings settings) {
+        this.userMessage = userMessage;
+        this.settings = settings;
+    }
 }
