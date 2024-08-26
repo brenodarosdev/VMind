@@ -1,6 +1,6 @@
 package com.vmind.virtual_assistants.openai.application.service;
 
-import com.vmind.virtual_assistants.chat.application.api.ChatSettings;
+import com.vmind.virtual_assistants.openai.application.api.OpenaiChatRequest;
 import com.vmind.virtual_assistants.openai.application.api.OpenaiTTSRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -22,14 +22,14 @@ public class OpenaiApplicationService implements OpenaiService {
     private final OpenAiAudioSpeechModel openAiAudioSpeechModel;
 
     @Override
-    public ChatResponse callChatModel(ChatSettings request) {
+    public ChatResponse callChatModel(OpenaiChatRequest request) {
         log.debug("[start] OpenaiApplicationService - callChatModel");
-        OpenAiChatOptions options = OpenAiChatOptions.builder()
-                .withModel(request.getModel())
-                .withMaxTokens(request.getMaxTokens())
-                .withTemperature(request.getTemperature())
+        OpenAiChatOptions chatOptions = OpenAiChatOptions.builder()
+                .withModel(request.getSettings().getModel())
+                .withMaxTokens(request.getSettings().getMaxTokens())
+                .withTemperature(request.getSettings().getTemperature())
                 .build();
-        ChatResponse response = openAiChatModel.call(new Prompt(request.getPrompt(), options));
+        ChatResponse response = openAiChatModel.call(new Prompt(request.getSettings().getPrompt(), chatOptions));
         log.debug("[finish] OpenaiApplicationService - callChatModel");
         return response;
     }

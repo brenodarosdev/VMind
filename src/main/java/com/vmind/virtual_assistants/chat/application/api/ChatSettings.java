@@ -18,6 +18,7 @@ public class ChatSettings {
     private Integer maxTokens;
     @NotNull
     private Float temperature;
+    @NotNull
     @Column(length = Integer.MAX_VALUE)
     private String prompt;
 }

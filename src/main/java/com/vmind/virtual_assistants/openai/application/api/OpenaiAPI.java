@@ -3,18 +3,21 @@ package com.vmind.virtual_assistants.openai.application.api;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Tag(name = "Openai")
 @RequestMapping("/public/v1/openai")
 public interface OpenaiAPI {
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Call Chat")
+    @PostMapping("/call-chat")
+    ChatResponse callChat(@RequestBody @Valid OpenaiChatRequest request);
+
+    @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Text to speech")
-    @RequestMapping("/text-to-speech")
+    @PostMapping("/text-to-speech")
     byte[] textToSpeech(@RequestBody @Valid OpenaiTTSRequest request);
 }
