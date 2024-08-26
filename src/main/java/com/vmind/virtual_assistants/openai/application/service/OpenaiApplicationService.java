@@ -2,6 +2,7 @@ package com.vmind.virtual_assistants.openai.application.service;
 
 import com.vmind.virtual_assistants.chat.application.api.ChatSettings;
 import com.vmind.virtual_assistants.chat.application.api.OpenaiTTSSettings;
+import com.vmind.virtual_assistants.openai.application.api.OpenaiTTSRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.ai.chat.model.ChatResponse;
@@ -35,14 +36,14 @@ public class OpenaiApplicationService implements OpenaiService {
     }
 
     @Override
-    public byte[] textToSpeech(String input, OpenaiTTSSettings request) {
+    public byte[] textToSpeech(OpenaiTTSRequest request) {
         log.debug("[start] OpenaiApplicationService - textToSpeech");
         OpenAiAudioSpeechOptions speechOptions = OpenAiAudioSpeechOptions.builder()
-                .withModel(request.getTtsModel())
-                .withVoice(request.getVoice())
-                .withResponseFormat(request.getResponseFormat())
+                .withModel(request.getSettings().getTtsModel())
+                .withVoice(request.getSettings().getVoice())
+                .withResponseFormat(request.getSettings().getResponseFormat())
                 .build();
-        SpeechResponse responseStream = openAiAudioSpeechModel.call(new SpeechPrompt(input, speechOptions));
+        SpeechResponse responseStream = openAiAudioSpeechModel.call(new SpeechPrompt(request.getInput(), speechOptions));
         log.debug("[finish] OpenaiApplicationService - textToSpeech");
         return responseStream.getResult().getOutput();
     }
