@@ -3,7 +3,7 @@ package com.vmind.virtual_assistants.chat.application.service;
 import com.vmind.virtual_assistants.chat.application.api.*;
 import com.vmind.virtual_assistants.chat.application.repository.ChatRepository;
 import com.vmind.virtual_assistants.chat.domain.Chat;
-import com.vmind.virtual_assistants.openai.service.OpenaiService;
+import com.vmind.virtual_assistants.openai.application.service.OpenaiService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.ai.chat.model.ChatResponse;
