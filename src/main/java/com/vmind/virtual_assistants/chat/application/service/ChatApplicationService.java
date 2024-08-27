@@ -7,6 +7,7 @@ import com.vmind.virtual_assistants.openai.application.api.OpenaiChatRequest;
 import com.vmind.virtual_assistants.openai.application.service.OpenaiService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.ai.chat.messages.MessageType;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.stereotype.Service;
 
@@ -22,20 +23,20 @@ public class ChatApplicationService implements ChatService {
     @Override
     public NewChatResponse newChat(ChatRequest chatRequest) {
         log.debug("[start] ChatApplicationService - newChat");
-        OpenaiChatRequest openaiChatRequest = OpenaiChatRequest.builder().settings(chatRequest.getChatSettings()).build();
-        ChatResponse openaiResponse = openaiService.callChatModel(openaiChatRequest);
-        Chat chat = new Chat(openaiResponse.getResult().getOutput().getContent(), chatRequest.getChatSettings(),
-                chatRequest.getOpenaiTTSSettings(), chatRequest.getElevenLabsTTSSettings());
+        Chat chat = new Chat(chatRequest.getChatSettings(), chatRequest.getOpenaiTTSSettings(), chatRequest.getElevenLabsTTSSettings());
+        chat.addMessage(chatRequest.getChatSettings().getPrompt(), MessageType.SYSTEM);
+        ChatResponse openaiResponse = openaiService.callChatModel(new OpenaiChatRequest(chat.getMessages(), chatRequest.getChatSettings()));
+        chat.addMessage(openaiResponse.getResult().getOutput().getContent(), MessageType.ASSISTANT);
         chatRepository.save(chat);
         log.debug("[finish] ChatApplicationService - newChat");
-        return new NewChatResponse(chat.getIdChat(), chat.getContent());
+        return new NewChatResponse(chat.getIdChat(), chat.getMessages());
     }
 
     @Override
-    public ChatDetailsResponse chatDetailsById(UUID idChat) {
+    public ChatSettingsResponse chatDetailsById(UUID idChat) {
         log.debug("[start] ChatApplicationService - chatById");
         Chat chat = chatRepository.chatById(idChat);
-        ChatDetailsResponse response = new ChatDetailsResponse(chat);
+        ChatSettingsResponse response = new ChatSettingsResponse(chat);
         log.debug("[finish] ChatApplicationService - chatById");
         return response;
     }
