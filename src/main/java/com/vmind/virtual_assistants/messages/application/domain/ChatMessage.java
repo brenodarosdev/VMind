@@ -1,4 +1,4 @@
-package com.vmind.virtual_assistants.chat.domain;
+package com.vmind.virtual_assistants.messages.application.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
@@ -11,16 +11,18 @@ import org.springframework.ai.chat.messages.MessageType;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Embeddable
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChatMessage implements Message {
-
+    UUID idChatMessage;
     @Column(length = Integer.MAX_VALUE)
-    private final String content;
-    private final MessageType messageType;
+    private String content;
+    private MessageType messageType;
 
     public ChatMessage(String content, MessageType messageType) {
+        this.idChatMessage = UUID.randomUUID();
         this.content = content;
         this.messageType = messageType;
     }

@@ -24,12 +24,12 @@ public class ChatApplicationService implements ChatService {
     public NewChatResponse newChat(ChatRequest chatRequest) {
         log.debug("[start] ChatApplicationService - newChat");
         Chat chat = new Chat(chatRequest.getChatSettings(), chatRequest.getOpenaiTTSSettings(), chatRequest.getElevenLabsTTSSettings());
-        chat.addMessage(chatRequest.getChatSettings().getPrompt(), MessageType.SYSTEM);
-        ChatResponse openaiResponse = openaiService.callChatModel(new OpenaiChatRequest(chat.getMessages(), chatRequest.getChatSettings()));
-        chat.addMessage(openaiResponse.getResult().getOutput().getContent(), MessageType.ASSISTANT);
+        chat.getMessages().addMessage(chatRequest.getChatSettings().getPrompt(), MessageType.SYSTEM);
+        ChatResponse openaiResponse = openaiService.callChatModel(new OpenaiChatRequest(chat.getMessages().getListChatMessages(), chatRequest.getChatSettings()));
+        chat.getMessages().addMessage(openaiResponse.getResult().getOutput().getContent(), MessageType.ASSISTANT);
         chatRepository.save(chat);
         log.debug("[finish] ChatApplicationService - newChat");
-        return new NewChatResponse(chat.getIdChat(), chat.getMessages());
+        return new NewChatResponse(chat.getIdChat(), chat.getMessages().getListChatMessages());
     }
 
     @Override

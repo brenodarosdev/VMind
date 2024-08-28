@@ -1,6 +1,6 @@
 package com.vmind.virtual_assistants.chat.application.api;
 
-import com.vmind.virtual_assistants.chat.domain.ChatMessage;
+import com.vmind.virtual_assistants.messages.application.domain.ChatMessage;
 import lombok.Value;
 
 import java.util.List;

@@ -4,14 +4,13 @@ import com.vmind.virtual_assistants.chat.application.api.ChatRequest;
 import com.vmind.virtual_assistants.chat.application.api.ChatSettings;
 import com.vmind.virtual_assistants.chat.application.api.ElevenLabsTTSSettings;
 import com.vmind.virtual_assistants.chat.application.api.OpenaiTTSSettings;
+import com.vmind.virtual_assistants.messages.application.domain.Messages;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.ai.chat.messages.MessageType;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -20,8 +19,8 @@ import java.util.UUID;
 public class Chat {
     @Id
     private UUID idChat;
-    @ElementCollection
-    private List<ChatMessage> messages;
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Messages messages;
     @Embedded
     private ChatSettings chatSettings;
     @Embedded
@@ -31,14 +30,10 @@ public class Chat {
 
     public Chat(ChatSettings chatSettings, OpenaiTTSSettings openaiTTSSettings, ElevenLabsTTSSettings elevenLabsTTSSettings) {
         this.idChat = UUID.randomUUID();
-        this.messages = new ArrayList<>();
+        this.messages = new Messages(idChat, new ArrayList<>());
         this.chatSettings = chatSettings;
         this.openaiTTSSettings = openaiTTSSettings;
         this.elevenLabsTTSSettings = elevenLabsTTSSettings;
-    }
-
-    public void addMessage(String content, MessageType messageType) {
-        this.messages.add(new ChatMessage(content, messageType));
     }
 
     public void modifyChatSettings(ChatRequest chatRequest) {
