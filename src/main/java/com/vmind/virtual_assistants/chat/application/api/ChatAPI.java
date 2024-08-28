@@ -20,7 +20,7 @@ public interface ChatAPI {
     @GetMapping("/find-chat/{idChat}")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Find Chat by ID")
-    ChatDetailsResponse getChatDetailsById(@PathVariable UUID idChat);
+    ChatSettingsResponse getChatDetailsById(@PathVariable UUID idChat);
 
     @PatchMapping("/modify-chat/{idChat}")
     @Operation(summary = "Modify Chat settings by ID")

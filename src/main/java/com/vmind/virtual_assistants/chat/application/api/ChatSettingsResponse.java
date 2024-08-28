@@ -6,16 +6,14 @@ import lombok.Value;
 import java.util.UUID;
 
 @Value
-public class ChatDetailsResponse {
+public class ChatSettingsResponse {
     private UUID idChat;
-    private String content;
     private ChatSettings chatSettings;
     private OpenaiTTSSettings openaiTTSSettings;
     private ElevenLabsTTSSettings elevenLabsTTSSettings;
 
-    public ChatDetailsResponse(Chat chat) {
+    public ChatSettingsResponse(Chat chat) {
         this.idChat = chat.getIdChat();
-        this.content = chat.getContent();
         this.chatSettings = chat.getChatSettings();
         this.openaiTTSSettings = chat.getOpenaiTTSSettings();
         this.elevenLabsTTSSettings = chat.getElevenLabsTTSSettings();

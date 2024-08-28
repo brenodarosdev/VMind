@@ -8,7 +8,10 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.ai.chat.messages.MessageType;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -17,8 +20,8 @@ import java.util.UUID;
 public class Chat {
     @Id
     private UUID idChat;
-    @Column(length = Integer.MAX_VALUE)
-    private String content;
+    @ElementCollection
+    private List<ChatMessage> messages;
     @Embedded
     private ChatSettings chatSettings;
     @Embedded
@@ -26,12 +29,16 @@ public class Chat {
     @Embedded
     private ElevenLabsTTSSettings elevenLabsTTSSettings;
 
-    public Chat(String content, ChatSettings chatSettings, OpenaiTTSSettings openaiTTSSettings, ElevenLabsTTSSettings elevenLabsTTSSettings) {
+    public Chat(ChatSettings chatSettings, OpenaiTTSSettings openaiTTSSettings, ElevenLabsTTSSettings elevenLabsTTSSettings) {
         this.idChat = UUID.randomUUID();
-        this.content = content;
+        this.messages = new ArrayList<>();
         this.chatSettings = chatSettings;
         this.openaiTTSSettings = openaiTTSSettings;
         this.elevenLabsTTSSettings = elevenLabsTTSSettings;
+    }
+
+    public void addMessage(String content, MessageType messageType) {
+        this.messages.add(new ChatMessage(content, messageType));
     }
 
     public void modifyChatSettings(ChatRequest chatRequest) {
