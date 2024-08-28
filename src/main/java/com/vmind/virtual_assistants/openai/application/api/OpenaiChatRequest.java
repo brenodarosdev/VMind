@@ -13,6 +13,7 @@ public class OpenaiChatRequest {
     @NotNull
     List<ChatMessage> messages;
     @Valid
+    @NotNull
     ChatSettings settings;
 
     public OpenaiChatRequest(List<ChatMessage> messages, ChatSettings settings) {
