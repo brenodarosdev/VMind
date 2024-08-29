@@ -16,5 +16,5 @@ public interface MessagesAPI {
     @GetMapping("/get-messages/{idMessages}")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Get list of messages from a chat by ID Messages")
-    List<ChatMessage> getMessagesById(@PathVariable UUID idMessages);
+    List<ChatMessage> getListMessagesById(@PathVariable UUID idMessages);
 }

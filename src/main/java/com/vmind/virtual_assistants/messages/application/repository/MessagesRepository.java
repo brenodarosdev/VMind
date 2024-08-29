@@ -5,5 +5,5 @@ import com.vmind.virtual_assistants.messages.domain.Messages;
 import java.util.UUID;
 
 public interface MessagesRepository {
-    Messages messagesById(UUID idMessages);
+    Messages listMessagesById(UUID idMessages);
 }

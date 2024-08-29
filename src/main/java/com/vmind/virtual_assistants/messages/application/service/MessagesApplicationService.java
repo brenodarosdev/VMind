@@ -17,10 +17,10 @@ public class MessagesApplicationService implements MessagesService {
     private final MessagesRepository messagesRepository;
 
     @Override
-    public List<ChatMessage> messagesById(UUID idMessages) {
-        log.debug("[start] MessagesApplicationService - messagesById");
-        Messages messages = messagesRepository.messagesById(idMessages);
-        log.debug("[finish] MessagesApplicationService - messagesById");
+    public List<ChatMessage> listMessagesById(UUID idMessages) {
+        log.debug("[start] MessagesApplicationService - listMessagesById");
+        Messages messages = messagesRepository.listMessagesById(idMessages);
+        log.debug("[finish] MessagesApplicationService - listMessagesById");
         return messages.getListChatMessages();
     }
 }

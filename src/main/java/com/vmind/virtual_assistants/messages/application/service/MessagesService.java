@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface MessagesService {
-    List<ChatMessage> messagesById(UUID idMessages);
+    List<ChatMessage> listMessagesById(UUID idMessages);
 }

@@ -16,10 +16,10 @@ public class MessagesController implements MessagesAPI {
     private final MessagesService messagesService;
 
     @Override
-    public List<ChatMessage> getMessagesById(UUID idMessages) {
-        log.debug("[start] MessagesController - getMessagesById");
-        List<ChatMessage> messages = messagesService.messagesById(idMessages);
-        log.debug("[finish] MessagesController - getMessagesById");
+    public List<ChatMessage> getListMessagesById(UUID idMessages) {
+        log.debug("[start] MessagesController - getListMessagesById");
+        List<ChatMessage> messages = messagesService.listMessagesById(idMessages);
+        log.debug("[finish] MessagesController - getListMessagesById");
         return messages;
     }
 }
