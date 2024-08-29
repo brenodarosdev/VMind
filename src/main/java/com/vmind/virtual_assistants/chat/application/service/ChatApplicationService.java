@@ -23,13 +23,15 @@ public class ChatApplicationService implements ChatService {
     @Override
     public NewChatResponse newChat(ChatRequest chatRequest) {
         log.debug("[start] ChatApplicationService - newChat");
-        Chat chat = new Chat(chatRequest.getChatSettings(), chatRequest.getOpenaiTTSSettings(), chatRequest.getElevenLabsTTSSettings());
+        Chat chat = new Chat(chatRequest.getChatSettings(), chatRequest.getOpenaiTTSSettings(),
+                chatRequest.getElevenLabsTTSSettings());
         chat.getMessages().addMessage(chatRequest.getChatSettings().getPrompt(), MessageType.SYSTEM);
-        ChatResponse openaiResponse = openaiService.callChatModel(new OpenaiChatRequest(chat.getMessages().getListChatMessages(), chatRequest.getChatSettings()));
+        ChatResponse openaiResponse = openaiService.callChatModel(new OpenaiChatRequest(chat.getMessages()
+                .getListChatMessages(), chatRequest.getChatSettings()));
         chat.getMessages().addMessage(openaiResponse.getResult().getOutput().getContent(), MessageType.ASSISTANT);
         chatRepository.save(chat);
         log.debug("[finish] ChatApplicationService - newChat");
-        return new NewChatResponse(chat.getIdChat(), chat.getMessages().getListChatMessages());
+        return new NewChatResponse(chat.getIdChat(), chat.getMessages().getIdMessages(), chat.getMessages().getListChatMessages());
     }
 
     @Override

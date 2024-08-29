@@ -2,6 +2,7 @@ package com.vmind.virtual_assistants.messages.application.service;
 
 import com.vmind.virtual_assistants.messages.domain.ChatMessage;
 import com.vmind.virtual_assistants.messages.application.repository.MessagesRepository;
+import com.vmind.virtual_assistants.messages.domain.Messages;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,8 @@ public class MessagesApplicationService implements MessagesService {
     @Override
     public List<ChatMessage> messagesById(UUID idMessages) {
         log.debug("[start] MessagesApplicationService - messagesById");
-        List<ChatMessage> messages = messagesRepository.messagesById(idMessages);
+        Messages messages = messagesRepository.messagesById(idMessages);
         log.debug("[finish] MessagesApplicationService - messagesById");
-        return messages;
+        return messages.getListChatMessages();
     }
 }

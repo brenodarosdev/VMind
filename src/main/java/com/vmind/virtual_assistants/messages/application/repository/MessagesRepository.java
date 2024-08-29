@@ -1,10 +1,9 @@
 package com.vmind.virtual_assistants.messages.application.repository;
 
-import com.vmind.virtual_assistants.messages.domain.ChatMessage;
+import com.vmind.virtual_assistants.messages.domain.Messages;
 
-import java.util.List;
 import java.util.UUID;
 
 public interface MessagesRepository {
-    List<ChatMessage> messagesById(UUID idMessages);
+    Messages messagesById(UUID idMessages);
 }
