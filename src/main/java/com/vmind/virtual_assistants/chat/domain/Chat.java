@@ -4,7 +4,7 @@ import com.vmind.virtual_assistants.chat.application.api.ChatRequest;
 import com.vmind.virtual_assistants.chat.application.api.ChatSettings;
 import com.vmind.virtual_assistants.chat.application.api.ElevenLabsTTSSettings;
 import com.vmind.virtual_assistants.chat.application.api.OpenaiTTSSettings;
-import com.vmind.virtual_assistants.messages.application.domain.Messages;
+import com.vmind.virtual_assistants.messages.domain.Messages;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

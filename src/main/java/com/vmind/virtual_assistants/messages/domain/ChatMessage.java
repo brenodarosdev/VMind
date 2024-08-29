@@ -1,4 +1,4 @@
-package com.vmind.virtual_assistants.messages.application.domain;
+package com.vmind.virtual_assistants.messages.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

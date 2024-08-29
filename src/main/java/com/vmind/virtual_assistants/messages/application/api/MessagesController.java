@@ -1,6 +1,6 @@
 package com.vmind.virtual_assistants.messages.application.api;
 
-import com.vmind.virtual_assistants.messages.application.domain.ChatMessage;
+import com.vmind.virtual_assistants.messages.domain.ChatMessage;
 import com.vmind.virtual_assistants.messages.application.service.MessagesService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;

@@ -1,6 +1,6 @@
 package com.vmind.virtual_assistants.messages.application.api;
 
-import com.vmind.virtual_assistants.messages.application.domain.ChatMessage;
+import com.vmind.virtual_assistants.messages.domain.ChatMessage;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
