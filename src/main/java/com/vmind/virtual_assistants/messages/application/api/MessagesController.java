@@ -30,4 +30,11 @@ public class MessagesController implements MessagesAPI {
         log.debug("[finish] MessagesController - postNewMessage");
         return response;
     }
+
+    @Override
+    public List<ChatMessage> patchModifyChatMessage(UUID idMessages, UUID idChatMessage, NewMessageRequest request) {
+        log.debug("[start] MessagesController - patchModifyChatMessage");
+        log.debug("[finish] MessagesController - patchModifyChatMessage");
+        return null;
+    }
 }
