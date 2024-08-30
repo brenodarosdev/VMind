@@ -3,6 +3,7 @@ package com.vmind.virtual_assistants.messages.domain;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.ai.chat.messages.Media;
 import org.springframework.ai.chat.messages.Message;
@@ -13,10 +14,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+@Getter
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChatMessage implements Message {
-    UUID idChatMessage;
+    private UUID idChatMessage;
     @Column(length = Integer.MAX_VALUE)
     private String content;
     private MessageType messageType;
