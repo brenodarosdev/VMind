@@ -27,7 +27,8 @@ public class MessagesController implements MessagesAPI {
     @Override
     public ChatMessage postNewMessage(UUID idMessages, NewMessageRequest request) {
         log.debug("[start] MessagesController - postNewMessage");
+        ChatMessage assistantMessage = messagesService.newMessage(idMessages, request);
         log.debug("[finish] MessagesController - postNewMessage");
-        return null;
+        return assistantMessage;
     }
 }

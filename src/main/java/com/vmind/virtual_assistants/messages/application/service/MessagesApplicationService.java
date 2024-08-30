@@ -1,5 +1,6 @@
 package com.vmind.virtual_assistants.messages.application.service;
 
+import com.vmind.virtual_assistants.messages.application.api.NewMessageRequest;
 import com.vmind.virtual_assistants.messages.domain.ChatMessage;
 import com.vmind.virtual_assistants.messages.application.repository.MessagesRepository;
 import com.vmind.virtual_assistants.messages.domain.Messages;
@@ -22,5 +23,12 @@ public class MessagesApplicationService implements MessagesService {
         Messages messages = messagesRepository.listMessagesById(idMessages);
         log.debug("[finish] MessagesApplicationService - listMessagesById");
         return messages.getListChatMessages();
+    }
+
+    @Override
+    public ChatMessage newMessage(UUID idMessages, NewMessageRequest request) {
+        log.debug("[start] MessagesApplicationService - newMessage");
+        log.debug("[finish] MessagesApplicationService - newMessage");
+        return null;
     }
 }
