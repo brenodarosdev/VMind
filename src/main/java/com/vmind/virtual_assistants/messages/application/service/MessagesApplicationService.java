@@ -1,5 +1,6 @@
 package com.vmind.virtual_assistants.messages.application.service;
 
+import com.vmind.virtual_assistants.messages.application.api.AssistantResponse;
 import com.vmind.virtual_assistants.messages.application.api.NewMessageRequest;
 import com.vmind.virtual_assistants.messages.domain.ChatMessage;
 import com.vmind.virtual_assistants.messages.application.repository.MessagesRepository;
@@ -31,7 +32,7 @@ public class MessagesApplicationService implements MessagesService {
     }
 
     @Override
-    public ChatMessage newMessage(UUID idMessages, NewMessageRequest request) {
+    public AssistantResponse newMessage(UUID idMessages, NewMessageRequest request) {
         log.debug("[start] MessagesApplicationService - newMessage");
         Messages messages = messagesRepository.listMessagesById(idMessages);
         messages.addMessage(request.getUserMessage(), MessageType.USER);
@@ -39,6 +40,6 @@ public class MessagesApplicationService implements MessagesService {
         ChatMessage assistantMessage = messages.addMessage(openaiResponse.getResult().getOutput().getContent(), MessageType.ASSISTANT);
         messagesRepository.save(messages);
         log.debug("[finish] MessagesApplicationService - newMessage");
-        return assistantMessage;
+        return new AssistantResponse(openaiResponse.getResult().getMetadata().getFinishReason(), assistantMessage);
     }
 }

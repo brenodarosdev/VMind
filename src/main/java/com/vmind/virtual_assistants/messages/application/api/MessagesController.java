@@ -24,10 +24,10 @@ public class MessagesController implements MessagesAPI {
     }
 
     @Override
-    public ChatMessage postNewMessage(UUID idMessages, NewMessageRequest request) {
+    public AssistantResponse postNewMessage(UUID idMessages, NewMessageRequest request) {
         log.debug("[start] MessagesController - postNewMessage");
-        ChatMessage assistantMessage = messagesService.newMessage(idMessages, request);
+        AssistantResponse response = messagesService.newMessage(idMessages, request);
         log.debug("[finish] MessagesController - postNewMessage");
-        return assistantMessage;
+        return response;
     }
 }
