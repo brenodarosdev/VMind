@@ -42,4 +42,11 @@ public class MessagesApplicationService implements MessagesService {
         log.debug("[finish] MessagesApplicationService - newMessage");
         return new AssistantResponse(openaiResponse.getResult().getMetadata().getFinishReason(), assistantMessage);
     }
+
+    @Override
+    public List<ChatMessage> modifyChatMessage(UUID idMessages, UUID idChatMessage, NewMessageRequest request) {
+        log.debug("[start] MessagesApplicationService - modifyChatMessage");
+        log.debug("[finish] MessagesApplicationService - modifyChatMessage");
+        return null;
+    }
 }
