@@ -6,4 +6,5 @@ import java.util.UUID;
 
 public interface MessagesRepository {
     Messages listMessagesById(UUID idMessages);
+    void save(Messages messages);
 }
