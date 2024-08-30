@@ -24,4 +24,11 @@ public class MessagesInfraRepository implements MessagesRepository {
         log.debug("[finish] MessagesInfraRepository - listMessagesById");
         return messages;
     }
+
+    @Override
+    public void save(Messages messages) {
+        log.debug("[start] MessagesInfraRepository - save");
+        messagesSpringDataJPARepository.save(messages);
+        log.debug("[finish] MessagesInfraRepository - save");
+    }
 }

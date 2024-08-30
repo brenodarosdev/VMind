@@ -31,7 +31,9 @@ public class Messages {
         this.listChatMessages = listChatMessages;
     }
 
-    public void addMessage(String content, MessageType messageType) {
-        this.listChatMessages.add(new ChatMessage(content, messageType));
+    public ChatMessage addMessage(String content, MessageType messageType) {
+        ChatMessage chatMessage = new ChatMessage(content, messageType);
+        this.listChatMessages.add(chatMessage);
+        return chatMessage;
     }
 }

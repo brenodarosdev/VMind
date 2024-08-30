@@ -22,4 +22,12 @@ public class MessagesController implements MessagesAPI {
         log.debug("[finish] MessagesController - getListMessagesById");
         return messages;
     }
+
+    @Override
+    public AssistantResponse postNewMessage(UUID idMessages, NewMessageRequest request) {
+        log.debug("[start] MessagesController - postNewMessage");
+        AssistantResponse response = messagesService.newMessage(idMessages, request);
+        log.debug("[finish] MessagesController - postNewMessage");
+        return response;
+    }
 }
