@@ -1,6 +1,5 @@
 package com.vmind.virtual_assistants.messages.application.api;
 
-import com.vmind.virtual_assistants.chat.application.api.ChatRequest;
 import com.vmind.virtual_assistants.messages.domain.ChatMessage;
 import com.vmind.virtual_assistants.messages.application.service.MessagesService;
 import lombok.RequiredArgsConstructor;

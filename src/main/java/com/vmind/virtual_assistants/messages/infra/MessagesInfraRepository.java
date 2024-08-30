@@ -28,6 +28,7 @@ public class MessagesInfraRepository implements MessagesRepository {
     @Override
     public void save(Messages messages) {
         log.debug("[start] MessagesInfraRepository - save");
+        messagesSpringDataJPARepository.save(messages);
         log.debug("[finish] MessagesInfraRepository - save");
     }
 }

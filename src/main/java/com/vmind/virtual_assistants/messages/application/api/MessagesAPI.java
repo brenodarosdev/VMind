@@ -1,13 +1,10 @@
 package com.vmind.virtual_assistants.messages.application.api;
 
-import com.vmind.virtual_assistants.chat.application.api.ChatRequest;
 import com.vmind.virtual_assistants.messages.domain.ChatMessage;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
