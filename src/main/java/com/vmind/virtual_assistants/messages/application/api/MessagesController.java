@@ -1,5 +1,6 @@
 package com.vmind.virtual_assistants.messages.application.api;
 
+import com.vmind.virtual_assistants.chat.application.api.ChatRequest;
 import com.vmind.virtual_assistants.messages.domain.ChatMessage;
 import com.vmind.virtual_assistants.messages.application.service.MessagesService;
 import lombok.RequiredArgsConstructor;
@@ -21,5 +22,12 @@ public class MessagesController implements MessagesAPI {
         List<ChatMessage> messages = messagesService.listMessagesById(idMessages);
         log.debug("[finish] MessagesController - getListMessagesById");
         return messages;
+    }
+
+    @Override
+    public ChatMessage postNewMessage(UUID idMessages, NewMessageRequest request) {
+        log.debug("[start] MessagesController - postNewMessage");
+        log.debug("[finish] MessagesController - postNewMessage");
+        return null;
     }
 }
