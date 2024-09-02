@@ -26,6 +26,7 @@ public class MessagesController implements MessagesAPI {
     @Override
     public void deleteMessages(UUID idMessages) {
         log.debug("[start] MessagesController - deleteMessages");
+        messagesService.deleteMessages(idMessages);
         log.debug("[finish] MessagesController - deleteMessages");
     }
 

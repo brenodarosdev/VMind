@@ -60,4 +60,10 @@ public class MessagesApplicationService implements MessagesService {
         log.debug("[finish] MessagesApplicationService - modifyChatMessage");
         return listChatMessages;
     }
+
+    @Override
+    public void deleteMessages(UUID idMessages) {
+        log.debug("[start] MessagesApplicationService - deleteMessages");
+        log.debug("[finish] MessagesApplicationService - deleteMessages");
+    }
 }

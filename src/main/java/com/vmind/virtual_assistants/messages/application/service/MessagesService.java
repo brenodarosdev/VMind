@@ -11,4 +11,5 @@ public interface MessagesService {
     List<ChatMessage> listMessagesById(UUID idMessages);
     AssistantResponse newMessage(UUID idMessages, NewMessageRequest request);
     List<ChatMessage> modifyChatMessage(UUID idMessages, UUID idChatMessage, NewMessageRequest request);
+    void deleteMessages(UUID idMessages);
 }
