@@ -3,6 +3,7 @@ package com.vmind.virtual_assistants.chat.application.service;
 import com.vmind.virtual_assistants.chat.application.api.*;
 import com.vmind.virtual_assistants.chat.application.repository.ChatRepository;
 import com.vmind.virtual_assistants.chat.domain.Chat;
+import com.vmind.virtual_assistants.messages.application.service.MessagesService;
 import com.vmind.virtual_assistants.openai.application.api.OpenaiChatRequest;
 import com.vmind.virtual_assistants.openai.application.service.OpenaiService;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ import java.util.UUID;
 public class ChatApplicationService implements ChatService {
     private final OpenaiService openaiService;
     private final ChatRepository chatRepository;
+    private final MessagesService messagesService;
 
     @Override
     public NewChatResponse newChat(ChatRequest chatRequest) {
@@ -55,7 +57,9 @@ public class ChatApplicationService implements ChatService {
     @Override
     public void deleteChat(UUID idChat) {
         log.debug("[start] ChatApplicationService - deleteChat");
+        Chat chat = chatRepository.chatById(idChat);
         chatRepository.deleteChat(idChat);
+        messagesService.deleteMessages(chat.getMessages().getIdMessages());
         log.debug("[finish] ChatApplicationService - deleteChat");
     }
 }

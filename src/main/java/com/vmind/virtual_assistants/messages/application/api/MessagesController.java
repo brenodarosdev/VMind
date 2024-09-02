@@ -24,13 +24,6 @@ public class MessagesController implements MessagesAPI {
     }
 
     @Override
-    public void deleteMessages(UUID idMessages) {
-        log.debug("[start] MessagesController - deleteMessages");
-        messagesService.deleteMessages(idMessages);
-        log.debug("[finish] MessagesController - deleteMessages");
-    }
-
-    @Override
     public AssistantResponse postNewMessage(UUID idMessages, NewMessageRequest request) {
         log.debug("[start] MessagesController - postNewMessage");
         AssistantResponse response = messagesService.newMessage(idMessages, request);

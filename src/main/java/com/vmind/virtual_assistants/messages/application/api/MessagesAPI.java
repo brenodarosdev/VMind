@@ -19,11 +19,6 @@ public interface MessagesAPI {
     @Operation(summary = "Get list of messages from a chat by ID Messages")
     List<ChatMessage> getListMessagesById(@PathVariable UUID idMessages);
 
-    @DeleteMapping("delete-messages/{idMessages}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Operation(summary = "Delete Messages by ID")
-    void deleteMessages(@PathVariable UUID idMessages);
-
     @PostMapping("/{idMessages}/new-message")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Sends new user message to Openai and saves Messages")
