@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.ai.chat.messages.MessageType;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Entity
@@ -35,5 +36,11 @@ public class Messages {
         ChatMessage chatMessage = new ChatMessage(content, messageType);
         this.listChatMessages.add(chatMessage);
         return chatMessage;
+    }
+
+    public Optional<ChatMessage> findChatMessageById(UUID idChatMessage) {
+        return listChatMessages.stream()
+                .filter(message -> message.getIdChatMessage().equals(idChatMessage))
+                .findFirst();
     }
 }

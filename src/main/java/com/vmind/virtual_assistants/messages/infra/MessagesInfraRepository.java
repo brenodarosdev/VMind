@@ -17,11 +17,11 @@ public class MessagesInfraRepository implements MessagesRepository {
     private final MessagesSpringDataJPARepository messagesSpringDataJPARepository;
 
     @Override
-    public Messages listMessagesById(UUID idMessages) {
-        log.debug("[start] MessagesInfraRepository - listMessagesById");
+    public Messages messagesById(UUID idMessages) {
+        log.debug("[start] MessagesInfraRepository - messagesById");
         Messages messages = messagesSpringDataJPARepository.findById(idMessages)
                         .orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Messages not found!"));
-        log.debug("[finish] MessagesInfraRepository - listMessagesById");
+        log.debug("[finish] MessagesInfraRepository - messagesById");
         return messages;
     }
 
