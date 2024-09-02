@@ -71,6 +71,10 @@ public class MessagesApplicationService implements MessagesService {
     @Override
     public void deleteChatMessages(UUID idMessages) {
         log.debug("[start] MessagesApplicationService - deleteChatMessages");
+        Messages messages = messagesRepository.messagesById(idMessages);
+        List<ChatMessage> listChatMessages = messages.getListChatMessages();
+        listChatMessages.subList(1, listChatMessages.size()).clear();
+        messagesRepository.save(messages);
         log.debug("[finish] MessagesApplicationService - deleteChatMessages");
     }
 }
