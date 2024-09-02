@@ -9,6 +9,7 @@ import java.util.UUID;
 
 public interface MessagesService {
     List<ChatMessage> listMessagesById(UUID idMessages);
+    void deleteMessages(UUID idMessages);
     AssistantResponse newMessage(UUID idMessages, NewMessageRequest request);
     List<ChatMessage> modifyChatMessage(UUID idMessages, UUID idChatMessage, NewMessageRequest request);
 }
