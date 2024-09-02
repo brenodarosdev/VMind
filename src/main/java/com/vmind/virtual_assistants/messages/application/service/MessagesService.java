@@ -12,4 +12,5 @@ public interface MessagesService {
     void deleteMessages(UUID idMessages);
     AssistantResponse newMessage(UUID idMessages, NewMessageRequest request);
     List<ChatMessage> modifyChatMessage(UUID idMessages, UUID idChatMessage, NewMessageRequest request);
+    void deleteChatMessages(UUID idMessages);
 }
