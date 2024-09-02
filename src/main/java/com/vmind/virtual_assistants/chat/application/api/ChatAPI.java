@@ -30,5 +30,5 @@ public interface ChatAPI {
     @DeleteMapping("/delete-chat/{idChat}")
     @Operation(summary = "Delete Chat by ID")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    void deleteChat(@PathVariable UUID idChat);
+    void deleteChatById(@PathVariable UUID idChat);
 }

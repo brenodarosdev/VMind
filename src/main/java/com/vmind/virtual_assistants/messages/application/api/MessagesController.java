@@ -40,9 +40,9 @@ public class MessagesController implements MessagesAPI {
     }
 
     @Override
-    public void deleteChatMessages(UUID idMessages) {
-        log.debug("[start] MessagesController - deleteChatMessages");
-        messagesService.deleteChatMessages(idMessages);
-        log.debug("[finish] MessagesController - deleteChatMessages");
+    public void deleteChatMessagesById(UUID idMessages) {
+        log.debug("[start] MessagesController - deleteChatMessagesById");
+        messagesService.deleteChatMessagesById(idMessages);
+        log.debug("[finish] MessagesController - deleteChatMessagesById");
     }
 }

@@ -7,5 +7,5 @@ import java.util.UUID;
 public interface ChatRepository {
     void save(Chat chat);
     Chat chatById(UUID idChat);
-    void deleteChat(UUID idChat);
+    void deleteChatById(UUID idChat);
 }

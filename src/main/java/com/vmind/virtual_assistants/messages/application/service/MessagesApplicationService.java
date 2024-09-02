@@ -33,10 +33,10 @@ public class MessagesApplicationService implements MessagesService {
     }
 
     @Override
-    public void deleteMessages(UUID idMessages) {
-        log.debug("[start] MessagesApplicationService - deleteMessages");
-        messagesRepository.deleteMessages(idMessages);
-        log.debug("[finish] MessagesApplicationService - deleteMessages");
+    public void deleteMessagesById(UUID idMessages) {
+        log.debug("[start] MessagesApplicationService - deleteMessagesById");
+        messagesRepository.deleteMessagesById(idMessages);
+        log.debug("[finish] MessagesApplicationService - deleteMessagesById");
     }
 
     @Override
@@ -70,12 +70,12 @@ public class MessagesApplicationService implements MessagesService {
     }
 
     @Override
-    public void deleteChatMessages(UUID idMessages) {
-        log.debug("[start] MessagesApplicationService - deleteChatMessages");
+    public void deleteChatMessagesById(UUID idMessages) {
+        log.debug("[start] MessagesApplicationService - deleteChatMessagesById");
         Messages messages = messagesRepository.messagesById(idMessages);
         List<ChatMessage> listChatMessages = messages.getListChatMessages();
         listChatMessages.subList(1, listChatMessages.size()).clear();
         messagesRepository.save(messages);
-        log.debug("[finish] MessagesApplicationService - deleteChatMessages");
+        log.debug("[finish] MessagesApplicationService - deleteChatMessagesById");
     }
 }

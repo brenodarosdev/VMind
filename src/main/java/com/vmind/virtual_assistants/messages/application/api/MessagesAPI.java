@@ -26,11 +26,11 @@ public interface MessagesAPI {
 
     @PatchMapping("/{idMessages}/modify-message/{idChatMessage}")
     @ResponseStatus(HttpStatus.OK)
-    @Operation(summary = "Modify a chat message, delete subsequent history, and send the user's message to Openai.")
+    @Operation(summary = "Edit a chat message, delete subsequent history, and send the user's message to Openai.")
     List<ChatMessage> patchModifyChatMessage(@PathVariable UUID idMessages, @PathVariable UUID idChatMessage, @RequestBody @Valid NewMessageRequest request);
 
     @DeleteMapping("/{idMessages}/delete-chat-messages")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete Chat Messages by ID")
-    void deleteChatMessages(@PathVariable UUID idMessages);
+    void deleteChatMessagesById(@PathVariable UUID idMessages);
 }

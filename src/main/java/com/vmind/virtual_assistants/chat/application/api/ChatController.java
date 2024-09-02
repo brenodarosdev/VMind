@@ -23,23 +23,23 @@ public class ChatController implements ChatAPI {
 
     @Override
     public ChatSettingsResponse getChatDetailsById(UUID idChat) {
-        log.debug("[start] ChatController - getChatById");
+        log.debug("[start] ChatController - getChatDetailsById");
         ChatSettingsResponse response = chatService.chatDetailsById(idChat);
-        log.debug("[finish] ChatController - getChatById");
+        log.debug("[finish] ChatController - getChatDetailsById");
         return response;
     }
 
     @Override
     public void patchModifyChatSettings(ChatRequest chatRequest, UUID idChat) {
-        log.debug("[start] ChatController - patchModifyChat");
+        log.debug("[start] ChatController - patchModifyChatSettings");
         chatService.modifyChatSettings(chatRequest, idChat);
-        log.debug("[finish] ChatController - patchModifyChat");
+        log.debug("[finish] ChatController - patchModifyChatSettings");
     }
 
     @Override
-    public void deleteChat(UUID idChat) {
-        log.debug("[start] ChatController - deleteChat");
-        chatService.deleteChat(idChat);
-        log.debug("[finish] ChatController - deleteChat");
+    public void deleteChatById(UUID idChat) {
+        log.debug("[start] ChatController - deleteChatById");
+        chatService.deleteChatById(idChat);
+        log.debug("[finish] ChatController - deleteChatById");
     }
 }

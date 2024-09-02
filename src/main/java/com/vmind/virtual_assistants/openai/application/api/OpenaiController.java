@@ -13,10 +13,10 @@ public class OpenaiController implements OpenaiAPI {
     private final OpenaiService openaiService;
 
     @Override
-    public ChatResponse callChat(OpenaiChatRequest request) {
-        log.debug("[start] OpenaiController - callChat");
+    public ChatResponse callChatModel(OpenaiChatRequest request) {
+        log.debug("[start] OpenaiController - callChatModel");
         ChatResponse response = openaiService.callChatModel(request);
-        log.debug("[finish] OpenaiController - callChat");
+        log.debug("[finish] OpenaiController - callChatModel");
         return response;
     }
 

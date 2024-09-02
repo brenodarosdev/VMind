@@ -8,8 +8,8 @@ import java.util.UUID;
 
 public interface MessagesService {
     List<ChatMessage> listMessagesById(UUID idMessages);
-    void deleteMessages(UUID idMessages);
+    void deleteMessagesById(UUID idMessages);
     ChatMessage newMessage(UUID idMessages, NewMessageRequest request);
     List<ChatMessage> modifyChatMessage(UUID idMessages, UUID idChatMessage, NewMessageRequest request);
-    void deleteChatMessages(UUID idMessages);
+    void deleteChatMessagesById(UUID idMessages);
 }
