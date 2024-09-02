@@ -29,4 +29,8 @@ public interface MessagesAPI {
     @Operation(summary = "Modify a chat message, delete subsequent history, and send the user's message to Openai.")
     List<ChatMessage> patchModifyChatMessage(@PathVariable UUID idMessages, @PathVariable UUID idChatMessage, @RequestBody @Valid NewMessageRequest request);
 
+    @DeleteMapping("/{idMessages}/delete-chat-messages")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Delete Chat Messages by ID")
+    void deleteChatMessages(@PathVariable UUID idMessages);
 }
