@@ -30,7 +30,8 @@ public class ChatApplicationService implements ChatService {
         chat.getMessages().addMessage(chatRequest.getChatSettings().getPrompt(), MessageType.SYSTEM);
         ChatResponse openaiResponse = openaiService.callChatModel(new OpenaiChatRequest(chat.getMessages()
                 .getListChatMessages(), chatRequest.getChatSettings()));
-        chat.getMessages().addMessage(openaiResponse.getResult().getOutput().getContent(), MessageType.ASSISTANT);
+        chat.getMessages().addMessage(openaiResponse.getResult().getOutput().getContent(), MessageType.ASSISTANT,
+                openaiResponse.getResult().getMetadata().getFinishReason());
         chatRepository.save(chat);
         log.debug("[finish] ChatApplicationService - newChat");
         return new NewChatResponse(chat.getIdChat(), chat.getMessages().getIdMessages(), chat.getMessages().getListChatMessages());

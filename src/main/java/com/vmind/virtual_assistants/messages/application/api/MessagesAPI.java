@@ -22,7 +22,7 @@ public interface MessagesAPI {
     @PostMapping("/{idMessages}/new-message")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Sends new user message to Openai and saves Messages")
-    AssistantResponse postNewMessage(@PathVariable UUID idMessages, @RequestBody @Valid NewMessageRequest request);
+    ChatMessage postNewMessage(@PathVariable UUID idMessages, @RequestBody @Valid NewMessageRequest request);
 
     @PatchMapping("/{idMessages}/modify-message/{idChatMessage}")
     @ResponseStatus(HttpStatus.OK)
