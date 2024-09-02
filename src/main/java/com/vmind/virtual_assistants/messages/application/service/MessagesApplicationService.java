@@ -34,6 +34,13 @@ public class MessagesApplicationService implements MessagesService {
     }
 
     @Override
+    public void deleteMessages(UUID idMessages) {
+        log.debug("[start] MessagesApplicationService - deleteMessages");
+        messagesRepository.deleteMessages(idMessages);
+        log.debug("[finish] MessagesApplicationService - deleteMessages");
+    }
+
+    @Override
     public AssistantResponse newMessage(UUID idMessages, NewMessageRequest request) {
         log.debug("[start] MessagesApplicationService - newMessage");
         Messages messages = messagesRepository.messagesById(idMessages);
@@ -59,11 +66,5 @@ public class MessagesApplicationService implements MessagesService {
         messagesRepository.save(messages);
         log.debug("[finish] MessagesApplicationService - modifyChatMessage");
         return listChatMessages;
-    }
-
-    @Override
-    public void deleteMessages(UUID idMessages) {
-        log.debug("[start] MessagesApplicationService - deleteMessages");
-        log.debug("[finish] MessagesApplicationService - deleteMessages");
     }
 }
