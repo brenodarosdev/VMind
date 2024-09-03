@@ -4,8 +4,8 @@ import com.vmind.virtual_assistants.chat.application.api.*;
 import com.vmind.virtual_assistants.chat.application.repository.ChatRepository;
 import com.vmind.virtual_assistants.chat.domain.Chat;
 import com.vmind.virtual_assistants.messages.application.service.MessagesService;
-import com.vmind.virtual_assistants.openai.application.api.OpenaiChatRequest;
-import com.vmind.virtual_assistants.openai.application.service.OpenaiService;
+import com.vmind.virtual_assistants.openai.application.api.OpenAIChatRequest;
+import com.vmind.virtual_assistants.openai.application.service.OpenAIService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.ai.chat.messages.MessageType;
@@ -18,7 +18,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class ChatApplicationService implements ChatService {
-    private final OpenaiService openaiService;
+    private final OpenAIService openaiService;
     private final ChatRepository chatRepository;
     private final MessagesService messagesService;
 
@@ -28,7 +28,7 @@ public class ChatApplicationService implements ChatService {
         Chat chat = new Chat(chatRequest.getChatSettings(), chatRequest.getOpenaiTTSSettings(),
                 chatRequest.getElevenLabsTTSSettings());
         chat.getMessages().addMessage(chatRequest.getChatSettings().getPrompt(), MessageType.SYSTEM);
-        ChatResponse openaiResponse = openaiService.callChatModel(new OpenaiChatRequest(chat.getMessages()
+        ChatResponse openaiResponse = openaiService.callChatModel(new OpenAIChatRequest(chat.getMessages()
                 .getListChatMessages(), chatRequest.getChatSettings()));
         chat.getMessages().addMessage(openaiResponse.getResult().getOutput().getContent(), MessageType.ASSISTANT,
                 openaiResponse.getResult().getMetadata().getFinishReason());

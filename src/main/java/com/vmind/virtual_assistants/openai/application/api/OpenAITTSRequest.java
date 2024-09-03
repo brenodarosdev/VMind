@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Value;
 
 @Value
-public class OpenaiTTSRequest {
+public class OpenAITTSRequest {
     @NotBlank
     String input;
     @Valid
