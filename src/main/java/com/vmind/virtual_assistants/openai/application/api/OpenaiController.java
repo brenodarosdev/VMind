@@ -32,7 +32,8 @@ public class OpenaiController implements OpenaiAPI {
     @Override
     public AudioTranscriptionResponse callTranscriptionModel(OpenaiTranscriptionRequest request) {
         log.debug("[start] OpenaiController - callTranscriptionModel");
+        AudioTranscriptionResponse response = openaiService.callTranscriptionModel(request);
         log.debug("[finish] OpenaiController - callTranscriptionModel");
-        return null;
+        return response;
     }
 }

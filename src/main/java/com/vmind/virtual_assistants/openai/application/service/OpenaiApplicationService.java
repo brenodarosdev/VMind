@@ -3,6 +3,7 @@ package com.vmind.virtual_assistants.openai.application.service;
 import com.vmind.virtual_assistants.messages.domain.ChatMessage;
 import com.vmind.virtual_assistants.openai.application.api.OpenaiChatRequest;
 import com.vmind.virtual_assistants.openai.application.api.OpenaiTTSRequest;
+import com.vmind.virtual_assistants.openai.application.api.OpenaiTranscriptionRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.ai.chat.messages.Message;
@@ -14,6 +15,7 @@ import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.ai.openai.audio.speech.SpeechPrompt;
 import org.springframework.ai.openai.audio.speech.SpeechResponse;
+import org.springframework.ai.openai.audio.transcription.AudioTranscriptionResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -56,5 +58,12 @@ public class OpenaiApplicationService implements OpenaiService {
         SpeechResponse responseStream = openAiAudioSpeechModel.call(new SpeechPrompt(request.getInput(), speechOptions));
         log.debug("[finish] OpenaiApplicationService - textToSpeech");
         return responseStream.getResult().getOutput();
+    }
+
+    @Override
+    public AudioTranscriptionResponse callTranscriptionModel(OpenaiTranscriptionRequest request) {
+        log.debug("[start] OpenaiApplicationService - callTranscriptionModel");
+        log.debug("[finish] OpenaiApplicationService - callTranscriptionModel");
+        return null;
     }
 }
