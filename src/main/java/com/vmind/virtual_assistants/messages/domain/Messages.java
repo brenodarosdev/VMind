@@ -32,15 +32,19 @@ public class Messages {
         this.listChatMessages = listChatMessages;
     }
 
-    public ChatMessage addMessage(String content, MessageType messageType) {
-        ChatMessage chatMessage = new ChatMessage(content, messageType);
+    public void addMessage(String content, MessageType messageType) {
+        this.listChatMessages.add(new ChatMessage(content, messageType));
+    }
+
+    public ChatMessage addMessage(String content, MessageType messageType, String finishReason) {
+        ChatMessage chatMessage = new ChatMessage(content, messageType, finishReason);
         this.listChatMessages.add(chatMessage);
         return chatMessage;
     }
 
     public Optional<ChatMessage> findChatMessageById(UUID idChatMessage) {
         return listChatMessages.stream()
-                .filter(message -> message.getIdChatMessage().equals(idChatMessage))
+                .filter(message -> message.getId().equals(idChatMessage))
                 .findFirst();
     }
 }

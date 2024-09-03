@@ -1,7 +1,6 @@
 package com.vmind.virtual_assistants.messages.application.service;
 
 import com.vmind.virtual_assistants.exception.APIException;
-import com.vmind.virtual_assistants.messages.application.api.AssistantResponse;
 import com.vmind.virtual_assistants.messages.application.api.NewMessageRequest;
 import com.vmind.virtual_assistants.messages.domain.ChatMessage;
 import com.vmind.virtual_assistants.messages.application.repository.MessagesRepository;
@@ -34,22 +33,23 @@ public class MessagesApplicationService implements MessagesService {
     }
 
     @Override
-    public void deleteMessages(UUID idMessages) {
-        log.debug("[start] MessagesApplicationService - deleteMessages");
-        messagesRepository.deleteMessages(idMessages);
-        log.debug("[finish] MessagesApplicationService - deleteMessages");
+    public void deleteMessagesById(UUID idMessages) {
+        log.debug("[start] MessagesApplicationService - deleteMessagesById");
+        messagesRepository.deleteMessagesById(idMessages);
+        log.debug("[finish] MessagesApplicationService - deleteMessagesById");
     }
 
     @Override
-    public AssistantResponse newMessage(UUID idMessages, NewMessageRequest request) {
+    public ChatMessage newMessage(UUID idMessages, NewMessageRequest request) {
         log.debug("[start] MessagesApplicationService - newMessage");
         Messages messages = messagesRepository.messagesById(idMessages);
         messages.addMessage(request.getUserMessage(), MessageType.USER);
         ChatResponse openaiResponse = openaiService.callChatModel(new OpenaiChatRequest(messages.getListChatMessages(), request.getChatSettings()));
-        ChatMessage assistantMessage = messages.addMessage(openaiResponse.getResult().getOutput().getContent(), MessageType.ASSISTANT);
+        ChatMessage assistantMessage = messages.addMessage(openaiResponse.getResult().getOutput().getContent(),
+                MessageType.ASSISTANT, openaiResponse.getResult().getMetadata().getFinishReason());
         messagesRepository.save(messages);
         log.debug("[finish] MessagesApplicationService - newMessage");
-        return new AssistantResponse(openaiResponse.getResult().getMetadata().getFinishReason(), assistantMessage);
+        return assistantMessage;
     }
 
     @Override
@@ -62,19 +62,20 @@ public class MessagesApplicationService implements MessagesService {
         listChatMessages.subList(listChatMessages.indexOf(chatMessage), listChatMessages.size()).clear();
         messages.addMessage(request.getUserMessage(), MessageType.USER);
         ChatResponse openaiResponse = openaiService.callChatModel(new OpenaiChatRequest(listChatMessages, request.getChatSettings()));
-        messages.addMessage(openaiResponse.getResult().getOutput().getContent(), MessageType.ASSISTANT);
+        messages.addMessage(openaiResponse.getResult().getOutput().getContent(), MessageType.ASSISTANT,
+                openaiResponse.getResult().getMetadata().getFinishReason());
         messagesRepository.save(messages);
         log.debug("[finish] MessagesApplicationService - modifyChatMessage");
         return listChatMessages;
     }
 
     @Override
-    public void deleteChatMessages(UUID idMessages) {
-        log.debug("[start] MessagesApplicationService - deleteChatMessages");
+    public void deleteChatMessagesById(UUID idMessages) {
+        log.debug("[start] MessagesApplicationService - deleteChatMessagesById");
         Messages messages = messagesRepository.messagesById(idMessages);
         List<ChatMessage> listChatMessages = messages.getListChatMessages();
         listChatMessages.subList(1, listChatMessages.size()).clear();
         messagesRepository.save(messages);
-        log.debug("[finish] MessagesApplicationService - deleteChatMessages");
+        log.debug("[finish] MessagesApplicationService - deleteChatMessagesById");
     }
 }

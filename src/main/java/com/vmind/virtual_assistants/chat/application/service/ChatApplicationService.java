@@ -30,7 +30,8 @@ public class ChatApplicationService implements ChatService {
         chat.getMessages().addMessage(chatRequest.getChatSettings().getPrompt(), MessageType.SYSTEM);
         ChatResponse openaiResponse = openaiService.callChatModel(new OpenaiChatRequest(chat.getMessages()
                 .getListChatMessages(), chatRequest.getChatSettings()));
-        chat.getMessages().addMessage(openaiResponse.getResult().getOutput().getContent(), MessageType.ASSISTANT);
+        chat.getMessages().addMessage(openaiResponse.getResult().getOutput().getContent(), MessageType.ASSISTANT,
+                openaiResponse.getResult().getMetadata().getFinishReason());
         chatRepository.save(chat);
         log.debug("[finish] ChatApplicationService - newChat");
         return new NewChatResponse(chat.getIdChat(), chat.getMessages().getIdMessages(), chat.getMessages().getListChatMessages());
@@ -38,28 +39,28 @@ public class ChatApplicationService implements ChatService {
 
     @Override
     public ChatSettingsResponse chatDetailsById(UUID idChat) {
-        log.debug("[start] ChatApplicationService - chatById");
+        log.debug("[start] ChatApplicationService - chatDetailsById");
         Chat chat = chatRepository.chatById(idChat);
         ChatSettingsResponse response = new ChatSettingsResponse(chat);
-        log.debug("[finish] ChatApplicationService - chatById");
+        log.debug("[finish] ChatApplicationService - chatDetailsById");
         return response;
     }
 
     @Override
     public void modifyChatSettings(ChatRequest chatRequest, UUID idChat) {
-        log.debug("[start] ChatApplicationService - modifyChat");
+        log.debug("[start] ChatApplicationService - modifyChatSettings");
         Chat chat = chatRepository.chatById(idChat);
         chat.modifyChatSettings(chatRequest);
         chatRepository.save(chat);
-        log.debug("[finish] ChatApplicationService - modifyChat");
+        log.debug("[finish] ChatApplicationService - modifyChatSettings");
     }
 
     @Override
-    public void deleteChat(UUID idChat) {
-        log.debug("[start] ChatApplicationService - deleteChat");
+    public void deleteChatById(UUID idChat) {
+        log.debug("[start] ChatApplicationService - deleteChatById");
         Chat chat = chatRepository.chatById(idChat);
-        chatRepository.deleteChat(idChat);
-        messagesService.deleteMessages(chat.getMessages().getIdMessages());
-        log.debug("[finish] ChatApplicationService - deleteChat");
+        chatRepository.deleteChatById(idChat);
+        messagesService.deleteMessagesById(chat.getMessages().getIdMessages());
+        log.debug("[finish] ChatApplicationService - deleteChatById");
     }
 }

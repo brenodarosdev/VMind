@@ -26,10 +26,10 @@ public class MessagesInfraRepository implements MessagesRepository {
     }
 
     @Override
-    public void deleteMessages(UUID idMessages) {
-        log.debug("[start] MessagesInfraRepository - deleteMessages");
+    public void deleteMessagesById(UUID idMessages) {
+        log.debug("[start] MessagesInfraRepository - deleteMessagesById");
         messagesSpringDataJPARepository.deleteById(idMessages);
-        log.debug("[finish] MessagesInfraRepository - deleteMessages");
+        log.debug("[finish] MessagesInfraRepository - deleteMessagesById");
     }
 
     @Override

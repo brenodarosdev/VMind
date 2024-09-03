@@ -24,11 +24,11 @@ public class MessagesController implements MessagesAPI {
     }
 
     @Override
-    public AssistantResponse postNewMessage(UUID idMessages, NewMessageRequest request) {
+    public ChatMessage postNewMessage(UUID idMessages, NewMessageRequest request) {
         log.debug("[start] MessagesController - postNewMessage");
-        AssistantResponse response = messagesService.newMessage(idMessages, request);
+        ChatMessage assistantMessage = messagesService.newMessage(idMessages, request);
         log.debug("[finish] MessagesController - postNewMessage");
-        return response;
+        return assistantMessage;
     }
 
     @Override
@@ -40,9 +40,9 @@ public class MessagesController implements MessagesAPI {
     }
 
     @Override
-    public void deleteChatMessages(UUID idMessages) {
-        log.debug("[start] MessagesController - deleteChatMessages");
-        messagesService.deleteChatMessages(idMessages);
-        log.debug("[finish] MessagesController - deleteChatMessages");
+    public void deleteChatMessagesById(UUID idMessages) {
+        log.debug("[start] MessagesController - deleteChatMessagesById");
+        messagesService.deleteChatMessagesById(idMessages);
+        log.debug("[finish] MessagesController - deleteChatMessagesById");
     }
 }
