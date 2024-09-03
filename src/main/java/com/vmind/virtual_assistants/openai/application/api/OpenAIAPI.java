@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Tag(name = "Openai")
 @RequestMapping("/public/v1/openai")
-public interface OpenaiAPI {
+public interface OpenAIAPI {
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Call Chat Model")
     @PostMapping("/call-chat")
-    ChatResponse callChatModel(@RequestBody @Valid OpenaiChatRequest request);
+    ChatResponse callChatModel(@RequestBody @Valid OpenAIChatRequest request);
 
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Text to speech")
     @PostMapping("/text-to-speech")
-    byte[] textToSpeech(@RequestBody @Valid OpenaiTTSRequest request);
+    byte[] textToSpeech(@RequestBody @Valid OpenAITTSRequest request);
 
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Call Transcription Model")
     @PostMapping("/transcription")
-    String callTranscriptionModel(@ModelAttribute @Valid OpenaiTranscriptionRequest request);
+    String callTranscriptionModel(@ModelAttribute @Valid OpenAITranscriptionRequest request);
 }

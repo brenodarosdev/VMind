@@ -5,8 +5,8 @@ import com.vmind.virtual_assistants.messages.application.api.NewMessageRequest;
 import com.vmind.virtual_assistants.messages.domain.ChatMessage;
 import com.vmind.virtual_assistants.messages.application.repository.MessagesRepository;
 import com.vmind.virtual_assistants.messages.domain.Messages;
-import com.vmind.virtual_assistants.openai.application.api.OpenaiChatRequest;
-import com.vmind.virtual_assistants.openai.application.service.OpenaiService;
+import com.vmind.virtual_assistants.openai.application.api.OpenAIChatRequest;
+import com.vmind.virtual_assistants.openai.application.service.OpenAIService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.ai.chat.messages.MessageType;
@@ -22,7 +22,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class MessagesApplicationService implements MessagesService {
     private final MessagesRepository messagesRepository;
-    private final OpenaiService openaiService;
+    private final OpenAIService openaiService;
 
     @Override
     public List<ChatMessage> listMessagesById(UUID idMessages) {
@@ -44,7 +44,7 @@ public class MessagesApplicationService implements MessagesService {
         log.debug("[start] MessagesApplicationService - newMessage");
         Messages messages = messagesRepository.messagesById(idMessages);
         messages.addMessage(request.getUserMessage(), MessageType.USER);
-        ChatResponse openaiResponse = openaiService.callChatModel(new OpenaiChatRequest(messages.getListChatMessages(), request.getChatSettings()));
+        ChatResponse openaiResponse = openaiService.callChatModel(new OpenAIChatRequest(messages.getListChatMessages(), request.getChatSettings()));
         ChatMessage assistantMessage = messages.addMessage(openaiResponse.getResult().getOutput().getContent(),
                 MessageType.ASSISTANT, openaiResponse.getResult().getMetadata().getFinishReason());
         messagesRepository.save(messages);
@@ -61,7 +61,7 @@ public class MessagesApplicationService implements MessagesService {
         List<ChatMessage> listChatMessages = messages.getListChatMessages();
         listChatMessages.subList(listChatMessages.indexOf(chatMessage), listChatMessages.size()).clear();
         messages.addMessage(request.getUserMessage(), MessageType.USER);
-        ChatResponse openaiResponse = openaiService.callChatModel(new OpenaiChatRequest(listChatMessages, request.getChatSettings()));
+        ChatResponse openaiResponse = openaiService.callChatModel(new OpenAIChatRequest(listChatMessages, request.getChatSettings()));
         messages.addMessage(openaiResponse.getResult().getOutput().getContent(), MessageType.ASSISTANT,
                 openaiResponse.getResult().getMetadata().getFinishReason());
         messagesRepository.save(messages);

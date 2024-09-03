@@ -2,9 +2,9 @@ package com.vmind.virtual_assistants.openai.application.service;
 
 import com.vmind.virtual_assistants.exception.APIException;
 import com.vmind.virtual_assistants.messages.domain.ChatMessage;
-import com.vmind.virtual_assistants.openai.application.api.OpenaiChatRequest;
-import com.vmind.virtual_assistants.openai.application.api.OpenaiTTSRequest;
-import com.vmind.virtual_assistants.openai.application.api.OpenaiTranscriptionRequest;
+import com.vmind.virtual_assistants.openai.application.api.OpenAIChatRequest;
+import com.vmind.virtual_assistants.openai.application.api.OpenAITTSRequest;
+import com.vmind.virtual_assistants.openai.application.api.OpenAITranscriptionRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.ai.chat.messages.Message;
@@ -28,13 +28,13 @@ import java.util.List;
 @Log4j2
 @Service
 @RequiredArgsConstructor
-public class OpenaiApplicationService implements OpenaiService {
+public class OpenAIApplicationService implements OpenAIService {
     private final OpenAiChatModel openAiChatModel;
     private final OpenAiAudioSpeechModel openAiAudioSpeechModel;
     private final OpenAiAudioTranscriptionModel openAiTranscriptionModel;
 
     @Override
-    public ChatResponse callChatModel(OpenaiChatRequest request) {
+    public ChatResponse callChatModel(OpenAIChatRequest request) {
         log.debug("[start] OpenaiApplicationService - callChatModel");
         List<Message> messages = convertToMessageList(request.getMessages());
         OpenAiChatOptions chatOptions = OpenAiChatOptions.builder()
@@ -54,7 +54,7 @@ public class OpenaiApplicationService implements OpenaiService {
     }
 
     @Override
-    public byte[] textToSpeech(OpenaiTTSRequest request) {
+    public byte[] textToSpeech(OpenAITTSRequest request) {
         log.debug("[start] OpenaiApplicationService - textToSpeech");
         OpenAiAudioSpeechOptions speechOptions = OpenAiAudioSpeechOptions.builder()
                 .withModel(request.getSettings().getTtsModel())
@@ -67,7 +67,7 @@ public class OpenaiApplicationService implements OpenaiService {
     }
 
     @Override
-    public String callTranscriptionModel(OpenaiTranscriptionRequest request) {
+    public String callTranscriptionModel(OpenAITranscriptionRequest request) {
         log.debug("[start] OpenaiApplicationService - callTranscriptionModel");
         OpenAiAudioTranscriptionOptions transcriptionOptions = OpenAiAudioTranscriptionOptions.builder()
                 .withModel(request.getModel())

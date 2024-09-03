@@ -9,14 +9,14 @@ import lombok.Value;
 import java.util.List;
 
 @Value
-public class OpenaiChatRequest {
+public class OpenAIChatRequest {
     @NotNull
     List<ChatMessage> messages;
     @Valid
     @NotNull
     ChatSettings settings;
 
-    public OpenaiChatRequest(List<ChatMessage> messages, ChatSettings settings) {
+    public OpenAIChatRequest(List<ChatMessage> messages, ChatSettings settings) {
         this.messages = messages;
         this.settings = settings;
     }
