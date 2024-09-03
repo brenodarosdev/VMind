@@ -4,10 +4,9 @@ import com.vmind.virtual_assistants.openai.application.api.OpenaiChatRequest;
 import com.vmind.virtual_assistants.openai.application.api.OpenaiTTSRequest;
 import com.vmind.virtual_assistants.openai.application.api.OpenaiTranscriptionRequest;
 import org.springframework.ai.chat.model.ChatResponse;
-import org.springframework.ai.openai.audio.transcription.AudioTranscriptionResponse;
 
 public interface OpenaiService {
     ChatResponse callChatModel(OpenaiChatRequest request);
     byte[] textToSpeech(OpenaiTTSRequest request);
-    AudioTranscriptionResponse callTranscriptionModel(OpenaiTranscriptionRequest request);
+    String callTranscriptionModel(OpenaiTranscriptionRequest request);
 }

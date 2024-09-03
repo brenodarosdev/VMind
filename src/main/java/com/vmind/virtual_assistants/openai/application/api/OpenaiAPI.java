@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.ai.chat.model.ChatResponse;
-import org.springframework.ai.openai.audio.transcription.AudioTranscriptionResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,5 +24,5 @@ public interface OpenaiAPI {
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Call Transcription Model")
     @PostMapping("/transcription")
-    AudioTranscriptionResponse callTranscriptionModel(@RequestBody @Valid OpenaiTranscriptionRequest request);
+    String callTranscriptionModel(@ModelAttribute @Valid OpenaiTranscriptionRequest request);
 }

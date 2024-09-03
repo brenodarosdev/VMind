@@ -4,7 +4,6 @@ import com.vmind.virtual_assistants.openai.application.service.OpenaiService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.ai.chat.model.ChatResponse;
-import org.springframework.ai.openai.audio.transcription.AudioTranscriptionResponse;
 import org.springframework.web.bind.annotation.RestController;
 
 @Log4j2
@@ -30,9 +29,9 @@ public class OpenaiController implements OpenaiAPI {
     }
 
     @Override
-    public AudioTranscriptionResponse callTranscriptionModel(OpenaiTranscriptionRequest request) {
+    public String callTranscriptionModel(OpenaiTranscriptionRequest request) {
         log.debug("[start] OpenaiController - callTranscriptionModel");
-        AudioTranscriptionResponse response = openaiService.callTranscriptionModel(request);
+        String response = openaiService.callTranscriptionModel(request);
         log.debug("[finish] OpenaiController - callTranscriptionModel");
         return response;
     }
