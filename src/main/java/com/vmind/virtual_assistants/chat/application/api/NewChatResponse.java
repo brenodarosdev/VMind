@@ -8,6 +8,7 @@ import java.util.UUID;
 
 @Value
 public class NewChatResponse {
+    String chatName;
     UUID idChat;
     UUID idMessages;
     List<ChatMessage> output;
