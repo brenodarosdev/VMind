@@ -25,7 +25,7 @@ public class ChatApplicationService implements ChatService {
     @Override
     public NewChatResponse newChat(ChatRequest chatRequest) {
         log.debug("[start] ChatApplicationService - newChat");
-        Chat chat = new Chat(chatRequest.getChatSettings(), chatRequest.getOpenaiTTSSettings(),
+        Chat chat = new Chat(chatRequest.getChatName(), chatRequest.getChatSettings(), chatRequest.getOpenaiTTSSettings(),
                 chatRequest.getElevenLabsTTSSettings());
         chat.getMessages().addMessage(chatRequest.getChatSettings().getPrompt(), MessageType.SYSTEM);
         ChatResponse openaiResponse = openaiService.callChatModel(new OpenAIChatRequest(chat.getMessages()
@@ -34,14 +34,14 @@ public class ChatApplicationService implements ChatService {
                 openaiResponse.getResult().getMetadata().getFinishReason());
         chatRepository.save(chat);
         log.debug("[finish] ChatApplicationService - newChat");
-        return new NewChatResponse(chat.getIdChat(), chat.getMessages().getIdMessages(), chat.getMessages().getListChatMessages());
+        return new NewChatResponse(chat.getName(), chat.getIdChat(), chat.getMessages().getIdMessages(), chat.getMessages().getListChatMessages());
     }
 
     @Override
-    public ChatSettingsResponse chatDetailsById(UUID idChat) {
+    public ChatDetailsResponse chatDetailsById(UUID idChat) {
         log.debug("[start] ChatApplicationService - chatDetailsById");
         Chat chat = chatRepository.chatById(idChat);
-        ChatSettingsResponse response = new ChatSettingsResponse(chat);
+        ChatDetailsResponse response = new ChatDetailsResponse(chat);
         log.debug("[finish] ChatApplicationService - chatDetailsById");
         return response;
     }

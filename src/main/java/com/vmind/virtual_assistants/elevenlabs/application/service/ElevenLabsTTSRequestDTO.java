@@ -8,9 +8,9 @@ public class ElevenLabsTTSRequestDTO {
     private String language_code;
     private VoiceSettingsDTO voice_settings;
 
-    public ElevenLabsTTSRequestDTO(String input, ElevenLabsTTSSettings request) {
+    public ElevenLabsTTSRequestDTO(String input, String modelId, ElevenLabsTTSSettings request) {
         this.text = input;
-        this.model_id = request.getModelId();
+        this.model_id = modelId;
         this.language_code = request.getLanguageCode();
         this.voice_settings = new VoiceSettingsDTO(request);
     }

@@ -21,7 +21,7 @@ public class ElevenLabsApplicationService implements ElevenLabsService {
     public byte[] textToSpeech(ElevenLabsTTSRequest request) {
         log.debug("[start] ElevenLabsApplicationService - textToSpeech");
         String bodyJsonString = new Gson()
-                .toJson(new ElevenLabsTTSRequestDTO(request.getInput(), request.getSettings()));
+                .toJson(new ElevenLabsTTSRequestDTO(request.getInput(), "eleven_turbo_v2_5", request.getSettings()));
         byte[] speech = elevenLabsClientFeign.textToSpeechStream(apiKey, request.getSettings().getVoiceId(), bodyJsonString);
         log.debug("[finish] ElevenLabsApplicationService - textToSpeech");
         return speech;

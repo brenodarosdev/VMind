@@ -12,8 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ElevenLabsTTSSettings {
     @NotBlank
-    private String modelId;
-    @NotBlank
     private String voiceId;
     @NotBlank
     private String languageCode;
